@@ -8,6 +8,8 @@
 void InicializaLAB (void );
 void MenuPrincipal ( void ) ;
 void JogarLab ( void );
+char ConvDir (int cod);
+void TelaPrbs ( void );
 
 int main (){
 	int entrada;
@@ -35,8 +37,6 @@ int main (){
 			system("cls");
 			InicializaLAB();
 			JogarLab();
-			LAB_MostraLab();
-			system("pause");
 		}
 		#endif
 
@@ -45,6 +45,11 @@ int main (){
 			printf("Opção inválida, por favor escolha uma das listadas acima: ");
 			scanf("%d", &entrada);
 		}
+		system("cls");
+		MenuPrincipal();
+
+		printf("Entre sua escolha: ");
+		scanf("%d",&entrada);
 	}
 
 
@@ -106,13 +111,19 @@ void JogarLab ( void )
 	{
 		if (entrada >=1 && entrada <= 4)
 		{
-
+			if (LAB_Andar(ConvDir(entrada)))
+			{
+				TelaPrbs();
+				return;
+			}
 		}
 
 		else if (entrada ==5)
 		{
 			int resp;
-			printf("Tem certeza? O progresso de seu jogo sera perdido.\n"
+			system("cls");
+			printf("Tem certeza que quer voltar ao menu principal?\n"
+					"O progresso de seu jogo sera perdido.\n"
 					"1 - SIM\n"
 					"2 - NAO\n");
 			scanf("%d", &resp);
@@ -129,10 +140,47 @@ void JogarLab ( void )
 		}
 		else
 		{
-
+			printf("Opção inválida, por favor escolha uma das listadas acima: ");
+			scanf("%d", &entrada);
 		}
-		
+		system("cls");
+		LAB_MostraLab();
+
+		printf("\n\n1 - Mover-se para Sul\n"
+				"2 - Mover-se para Norte\n"
+				"3 - Mover-se para Oeste\n"
+				"4 - Mover-se para Leste\n"
+				"5 - Voltar ao menu principal\n\n"
+				"Escolha uma das opcoes: ");
+		scanf("%d",&entrada);
 	}
 
 
+}
+
+char ConvDir (int cod)
+{
+	if (cod == 1)
+	{
+		return 'n';
+	}
+	else if (cod == 2)
+	{
+		return 's';
+	}
+	else if (cod == 3)
+	{
+		return 'o';
+	}
+	else
+	{
+		return 'l';
+	}
+
+}
+void TelaPrbs ( void )
+{
+	system("cls");
+	printf("\n\n\n\n\t\t\t\t\tPARABENS!!!\n\n\n\n\n\n");
+	system("pause");
 }

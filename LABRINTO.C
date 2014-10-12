@@ -180,6 +180,29 @@ void LAB_CriarSaida (int x, int y )
 
 } /* Fim função: LAB  &Criar Saida */
 
+/***************************************************************************
+*
+*  Função: LAB  &Andar
+*****/
+
+int LAB_Andar (char direcao )
+{
+	int chave_prox, chave;
+
+	GRF_ObterCorr(labirinto,&chave,NULL);
+	chave_prox=ObterChaveDir(chave, direcao);
+
+	GRF_IrVizinho(labirinto, chave_prox);
+
+	if (chave_prox==LAB_saida)
+	{
+		return 1;
+	}
+
+	return 0;
+
+} /* Fim função: LAB  &Andar */
+
 /*****  Código das funções encapsuladas no módulo  *****/
 
 /***********************************************************************

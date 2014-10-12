@@ -16,6 +16,7 @@
 *
 *
 ***************************************************************************/
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -33,6 +34,7 @@ static GRF_tppGrafo labirinto;
 
 int ObterChaveCord (int i, int j);
 int ObterChaveDir (int chave, char direcao);
+void TransfCord (int x, int y, int * i, int *j);
 
 
 /*****  Código das funções exportadas pelo módulo  *****/
@@ -352,7 +354,7 @@ int ObterChaveDir (int chave, char direcao)
 *     
 *
 ***********************************************************************/
-int TransfCord (int x, int y, int * i, int *j)
+void TransfCord (int x, int y, int * i, int *j)
 {
 	*i=x-1;
 	*j=LAB_altura-y;

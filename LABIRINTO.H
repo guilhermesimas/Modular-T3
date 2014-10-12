@@ -64,6 +64,8 @@ void LAB_MostraLab ( void );
 void LAB_CriarEntrada (int x, int y );
 void LAB_CriarSaida (int x, int y );
 int LAB_Andar (char direcao );
+void LAB_Carregar ( char * nome_entrada );
+void LAB_Salvar ( char * nome_saida );
 
 
 

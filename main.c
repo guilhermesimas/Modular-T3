@@ -34,7 +34,9 @@ int main (){
 		
 		else if (entrada == 2)
 		{
-			/* carregando um labirinto */
+			system("cls");
+			LAB_Carregar("teste");
+			JogarLab();
 		}
 
 		#ifdef _DEBUG

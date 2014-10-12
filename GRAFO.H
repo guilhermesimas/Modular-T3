@@ -66,10 +66,10 @@ typedef struct GRF_tagGrafo * GRF_tppGrafo ;
 			   /* O grafo nao existe */
 
          GRF_CondRetFaltouMemoria ,
-               /* Faltou memória ao tentar criar um elemento de lista */
+               /* Faltou memória ao tentar criar um elemento do grafo */
 
 		 GRF_CondRetErroAoObterValor,
-		       /*erro ao obter elemento de alguma das listas */
+		       /*erro ao obter algum valor do grafo */
 
 		 GRF_CondRetVerticesDesconexos,
 		       /* nao existe caminho entre os vertices */

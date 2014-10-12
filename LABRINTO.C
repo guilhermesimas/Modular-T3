@@ -48,19 +48,9 @@ void TransfCord (int x, int y, int * i, int *j);
 void LAB_CriarLab (int altura, int largura)
 {
 
-	int i, j;
-
 	GRF_CriarGrafo(&labirinto,NULL);
 	LAB_altura=altura;
 	LAB_largura=largura;
-
-	for(j=0;j<altura;j++)
-	{
-		for(i=0;i<largura;i++)
-		{
-			GRF_CriaVertice(labirinto,NULL,ObterChaveCord(i,j));
-		}
-	}
 
 } /* Fim função: LAB  &Criar Labirinto */
 
@@ -71,12 +61,15 @@ void LAB_CriarLab (int altura, int largura)
 
 void LAB_CriarCaminho (int x, int y, char direcao)
 {
-	int chave, i, j;
+	int chave1, chave2, i, j;
 
 	TransfCord(x, y, &i, &j);	
-	chave=ObterChaveCord(i,j);
+	chave1=ObterChaveCord(i,j);
+	chave2=ObterChaveDir(chave1,direcao);
 
-	GRF_CriaAresta(labirinto,chave,ObterChaveDir(chave,direcao));
+	GRF_CriaVertice(labirinto,NULL,chave1);
+	GRF_CriaVertice(labirinto,NULL,chave2);
+	GRF_CriaAresta(labirinto,chave1,chave2);
 
 } /* Fim função: LAB  &Criar Caminho */
 
@@ -267,7 +260,7 @@ void LAB_Salvar ( char * nome_saida )
 
 void LAB_Carregar ( char * nome_entrada )
 {
-	int chave_vertice ;
+	int chave_vertice;
 	char direcao ;
 	FILE * arq_entrada ;
 
@@ -283,7 +276,8 @@ void LAB_Carregar ( char * nome_entrada )
 	
 	while (fscanf (arq_entrada , "%d %c" , &chave_vertice , &direcao )==2)
 	{
-		GRF_CriaAresta ( labirinto , chave_vertice , ObterChaveDir ( chave_vertice , direcao )  ) ;
+		
+		LAB_CriarCaminho ( chave_vertice%100+1, LAB_altura-chave_vertice/100, direcao ) ;
 	}/* while */
 	fclose (arq_entrada);
 

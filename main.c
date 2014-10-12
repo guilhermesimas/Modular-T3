@@ -60,7 +60,7 @@ int main (){
 		printf("Entre sua escolha: ");
 		scanf("%d",&entrada);
 	}
-
+	
 
 	return 0;
 }

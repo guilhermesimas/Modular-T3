@@ -235,22 +235,22 @@ void LAB_Salvar ( char * nome_saida )
 
 	for ( j = 0 ; j < LAB_altura ; j++ )
 	{
-		for ( i = 0 ; j < LAB_largura ; j++ )
+		for ( i = 0 ; i < LAB_largura ; i++ )
 		{
 			chave_vertice = ObterChaveCord ( i , j ) ;
 
-			if ( GRF_ExisteVertice ( labirinto , chave_vertice ) == GRF_CondRetVerticeJaExiste )
-			{
+			//if ( GRF_ExisteVertice ( labirinto , chave_vertice ) == GRF_CondRetVerticeJaExiste )
+			//{
 				
 				if( GRF_ExisteAresta ( labirinto , chave_vertice , ObterChaveDir ( chave_vertice , 'L' ) ) == GRF_CondRetArestaJaExiste )
 				{
-					fprintf ( arq_saida , "%d %c" , chave_vertice , 'L' ) ;
+					fprintf ( arq_saida , "%d %c\n" , chave_vertice , 'L' ) ;
 				}
 				if( GRF_ExisteAresta ( labirinto , chave_vertice , ObterChaveDir ( chave_vertice , 'S' ) ) == GRF_CondRetArestaJaExiste )
 				{
-					fprintf ( arq_saida , "%d %c" , chave_vertice , 'S' ) ;
+					fprintf ( arq_saida , "%d %c\n" , chave_vertice , 'S' ) ;
 				}
-			}
+		//	}
 		}
 	}/* for */
 

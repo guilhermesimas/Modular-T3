@@ -147,13 +147,11 @@ void LAB_MostraLab ( void )
 	printf("   ");
 	for (i=1 ; i<=LAB_largura; i++ )
 	{
-		printf("%d",i);
-		if (i<10)
-		{
-			printf(" ");
-		}
+		printf("%d",i%10);
+		if (i%10==9)
+			printf("%d",(i+1)/10);
 		else
-			printf("");
+			printf(" ");
 	}
 	printf("\n");
 

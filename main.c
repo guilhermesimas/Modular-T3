@@ -5,6 +5,7 @@
 
 #include "LABIRINTO.H"
 
+void Titulo ( void );
 void InicializaLAB (void );
 void MenuPrincipal ( void ) ;
 void JogarLab ( void );
@@ -12,6 +13,8 @@ char ConvDir (int cod);
 void TelaPrbs ( void );
 int ReobterEntrada ( void );
 void CriarLab ( void );
+void ObtemPosicaoValida(int altura,int largura,int *x,int *y);
+
 
 int main (){
 	int entrada;
@@ -25,6 +28,7 @@ int main (){
 	{
 		if(entrada==1)
 		{
+			system("cls");
 			CriarLab();
 		}
 		
@@ -57,9 +61,9 @@ int main (){
 	return 0;
 }
 
-void MenuPrincipal ( void ) {
-
-	printf("\n\n");
+void Titulo ( void )
+{
+		printf("\n\n");
 	printf("\t\t _           _     _      _       _        \n"
 		   "\t\t| |         | |   (_)    (_)     | |       \n"
 		   "\t\t| |     __ _| |__  _ _ __ _ _ __ | |_ ___  \n"
@@ -68,6 +72,11 @@ void MenuPrincipal ( void ) {
 		   "\t\t\\_____/\\__,_|_.__/|_|_|  |_|_| |_|\\__\\___/ \n"
 		   "                                           \n"
 		   "                                           \n");
+
+}
+void MenuPrincipal ( void ) {
+
+	Titulo();
 	printf("\t\t\tMENU PRINCIPAL\n"
 			"\t\t\t1 - Criar um labirinto\n"
 			"\t\t\t2 - Carregar um labirinto\n"
@@ -194,24 +203,59 @@ int ReobterEntrada ( void )
 
 void CriarLab ( void )
 {
-	int input1, input2;
-
-	printf("Quantas celulas de altura deve ter o labirinto? (Maximo de 40)\n");
-	scanf("%d",&input1);
-	while(0)
+	int altura, largura, x,y;
+	printf("Criando Labirinto...\n\n");
+	Titulo();
+	printf("Quantas celulas de altura deve ter o labirinto? (Maximo de 38)\n");
+	scanf("%d",&altura);
+	while(altura<=0 || altura >38)
 	{
+		printf("Altura invalida, forneca uma entre 1 e 38: ");
+		scanf("%d",&altura);
+
 	}
 
-	printf("Quantas celulas de largura deve ter o labirinto? (Maximo de 40)\n");
-	scanf("%d",&input2);
-	while(0)
+	printf("Quantas celulas de largura deve ter o labirinto? (Maximo de 38)\n");
+	scanf("%d",&largura);
+	while(largura<=0 || largura >38)
 	{
+		printf("Largura invalida, forneca uma entre 1 e 38: ");
+		scanf("%d",&largura);
+
 	}
 
-	LAB_CriarLab(input1,input2);
+	LAB_CriarLab(altura,largura);
 
 	system("cls");
+	printf("Criando Labirinto...\n\n");
 	LAB_MostraLab();
 
+	printf("\n\nQual a posicao da entrada? (x,y)\n");
+	ObtemPosicaoValida(altura,largura,&x,&y);
+	LAB_CriarEntrada(x,y);
+
+	printf("Qual a posicao da saida? (x,y)\n");
+	ObtemPosicaoValida(altura,largura,&x,&y);
+	LAB_CriarSaida(x,y);
+
+	system("cls");
+	printf("Criando Labirinto...\n\n");
+	LAB_MostraLab();
+
+
 	system("pause");
+}
+void ObtemPosicaoValida(int altura,int largura,int *x,int *y)
+{
+	scanf("%d,%d",x,y);
+	while (*x<1 || *x>largura )
+	{
+		printf("Posicao x invalida, forneca uma coordenada entre 1 e %d: ", largura);
+		scanf("%d",x);
+	}
+	while ( *y<1 || *y>altura)
+	{
+		printf("Posicao y invalida, forneca uma coordenada entre 1 e %d: ", altura);
+		scanf("%d",y);
+	}
 }

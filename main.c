@@ -10,6 +10,7 @@ void MenuPrincipal ( void ) ;
 void JogarLab ( void );
 char ConvDir (int cod);
 void TelaPrbs ( void );
+int ReobterEntrada ( void );
 
 int main (){
 	int entrada;
@@ -23,7 +24,7 @@ int main (){
 	{
 		if(entrada==1)
 		{
-			/* criando um labirinto */
+			CriarLab();
 		}
 		
 		else if (entrada == 2)
@@ -42,8 +43,7 @@ int main (){
 
 		else
 		{
-			printf("Opção inválida, por favor escolha uma das listadas acima: ");
-			scanf("%d", &entrada);
+			entrada=ReobterEntrada();
 		}
 		system("cls");
 		MenuPrincipal();
@@ -129,19 +129,20 @@ void JogarLab ( void )
 			scanf("%d", &resp);
 			while (resp !=1 && resp!=2)
 			{
-				printf("Opção inválida, por favor escolha uma das listadas acima: ");
-				scanf("%d", &resp);
+				resp=ReobterEntrada();
 			}
 			if (resp == 1 )
 			{
-				return; ///////////////////////////////////////////////////////////////////////////
+				return; 
 			}
 
 		}
 		else
 		{
-			printf("Opção inválida, por favor escolha uma das listadas acima: ");
-			scanf("%d", &entrada);
+			while (entrada<1 || entrada >5)
+			{
+				entrada=ReobterEntrada();
+			}
 		}
 		system("cls");
 		LAB_MostraLab();
@@ -154,8 +155,6 @@ void JogarLab ( void )
 				"Escolha uma das opcoes: ");
 		scanf("%d",&entrada);
 	}
-
-
 }
 
 char ConvDir (int cod)
@@ -183,4 +182,32 @@ void TelaPrbs ( void )
 	system("cls");
 	printf("\n\n\n\n\t\t\t\t\tPARABENS!!!\n\n\n\n\n\n");
 	system("pause");
+}
+int ReobterEntrada ( void )
+{
+	int entrada;
+	printf("Opcao invalida, por favor escolha uma das listadas acima: ");
+	scanf("%d", &entrada);
+	return entrada;
+}
+
+void CriarLab ( void )
+{
+	int input1, input2;
+
+	printf("Quantas celulas de altura deve ter o labirinto? (Maximo de 40)\n");
+	scanf("%d",&input1);
+	while(0)
+	{
+	}
+
+	printf("Quantas celulas de largura deve ter o labirinto? (Maximo de 40)\n");
+	scanf("%d",&input2);
+	while(0)
+	{
+	}
+
+	LAB_CriarLab(input1,input2);
+
+	system("cls"
 }

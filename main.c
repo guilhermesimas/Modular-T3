@@ -249,6 +249,10 @@ void CriarLab ( void )
 	printf("Criando Labirinto...\n\n");
 	LAB_MostraLab();
 
+	printf("Comandos:\n"
+			"caminho x,y <direcao>\n"
+			"salvar <nomedoarquivo>\n");
+
 
 	system("pause");
 }

@@ -30,13 +30,15 @@ int main (){
 		{
 			system("cls");
 			CriarLab();
+			/******************   ver cirar lab pra interface de usuario que falta  *******************/
 		}
 		
 		else if (entrada == 2)
 		{
 			system("cls");
-			LAB_Carregar("teste");
+			LAB_Carregar("teste.lab");
 			JogarLab();
+			/************** Falta interface com usuario pedindo nome do arquivo  **************************/
 		}
 
 		#ifdef _DEBUG
@@ -253,8 +255,10 @@ void CriarLab ( void )
 
 	printf("Comandos:\n"
 			"caminho x,y <direcao>\n"
-			"salvar <nomedoarquivo>\n");
+			"salvar <nomedoarquivo>\n"
+			"resolver\n");
 
+	/**********************   FALTA COISA AQUI      **********************************////////////////////////////////////////////////////////////
 
 	system("pause");
 }

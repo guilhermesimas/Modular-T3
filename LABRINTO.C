@@ -46,17 +46,17 @@ int ObterChaveDir (int chave, char direcao);
 void LAB_CriarLab (int altura, int largura)
 {
 
-	int x, y;
+	int i, j;
 
 	GRF_CriarGrafo(&labirinto,NULL);
 	LAB_altura=altura;
 	LAB_largura=largura;
 
-	for(y=0;y<altura;y++)
+	for(j=0;j<altura;j++)
 	{
-		for(x=0;x<largura;x++)
+		for(i=0;i<largura;i++)
 		{
-			GRF_CriaVertice(labirinto,NULL,ObterChaveCord(x,y));
+			GRF_CriaVertice(labirinto,NULL,ObterChaveCord(i,j));
 		}
 	}
 
@@ -69,7 +69,10 @@ void LAB_CriarLab (int altura, int largura)
 
 void LAB_CriarCaminho (int x, int y, char direcao)
 {
-	int chave=ObterChaveCord(x,y);
+	int chave, i, j;
+
+	TransfCord(x, y, &i, &j);	
+	chave=ObterChaveCord(i,j);
 
 	GRF_CriaAresta(labirinto,chave,ObterChaveDir(chave,direcao));
 
@@ -81,10 +84,10 @@ void LAB_CriarCaminho (int x, int y, char direcao)
 *****/
 void LAB_MostraLab ( void )
 {
-	int x, y,chave;
+	int i, j,chave;
 
 	
-	for (x=0 ; x<2*LAB_largura+1; x++ )
+	for (i=0 ; i<2*LAB_largura+1; i++ )
 	{
 		printf("_");
 	}
@@ -92,13 +95,13 @@ void LAB_MostraLab ( void )
 
 	printf("\n");
 
-	for (y=0; y<LAB_altura ; y++)
+	for (j=0; j<LAB_altura ; j++)
 	{
 		printf("|");
 
-		for (x=0; x<LAB_largura ; x++ )
+		for (i=0; i<LAB_largura ; i++ )
 		{
-			chave=ObterChaveCord(x,y);
+			chave=ObterChaveCord(i,j);
 			if( GRF_ExisteAresta(labirinto,chave,ObterChaveDir(chave,'s')) == GRF_CondRetArestaJaExiste)
 			{
 				printf(" ");
@@ -135,9 +138,9 @@ void LAB_MostraLab ( void )
 *
 ***********************************************************************/
 
-int ObterChaveCord (int x, int y)
+int ObterChaveCord (int i, int j)
 {
-	return y*100+x;
+	return j*100+i;
 }  /* Fim função: LAB  &Criar Labirinto */
 
 /***********************************************************************
@@ -174,4 +177,18 @@ int ObterChaveDir (int chave, char direcao)
 
 	return -1;
 
+}
+
+/***********************************************************************
+*
+*  $FC Função: LAB
+*
+*  $ED Descrição da função
+*     
+*
+***********************************************************************/
+int TransfCord (int x, int y, int * i, int *j)
+{
+	*i=x-1;
+	*j=LAB_altura-y;
 }

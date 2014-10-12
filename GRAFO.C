@@ -532,7 +532,11 @@
 	 }/* if */
 
 	 *pChave = pGrafo->pVerticeCorr->chave ;
-	 * ppValor = pGrafo->pVerticeCorr->pValor ;
+
+	 if (ppValor !=NULL)
+	 {
+		* ppValor = pGrafo->pVerticeCorr->pValor ;
+	 } /* if */
 
 	 return GRF_CondRetOK; 
 

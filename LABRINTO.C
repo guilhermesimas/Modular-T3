@@ -40,7 +40,7 @@ int ObterChaveDir (int chave, char direcao);
 
 /***************************************************************************
 *
-*  Função: GRF  &Criar Labirinto
+*  Função: LAB  &Criar Labirinto
 *****/
 
 void LAB_CriarLab (int altura, int largura)
@@ -64,7 +64,7 @@ void LAB_CriarLab (int altura, int largura)
 
 /***************************************************************************
 *
-*  Função: GRF  &Criar Caminho
+*  Função: LAB  &Criar Caminho
 *****/
 
 void LAB_CriarCaminho (int x, int y, char direcao)
@@ -76,17 +76,20 @@ void LAB_CriarCaminho (int x, int y, char direcao)
 
 	GRF_CriaAresta(labirinto,chave,ObterChaveDir(chave,direcao));
 
-} /* Fim função: LAB  &Criar Labirinto */
+} /* Fim função: LAB  &Criar Caminho */
 
 /***************************************************************************
 *
-*  Função: GRF  &Criar Caminho
+*  Função: LAB  &Mostrar Labirinto
 *****/
+
 void LAB_MostraLab ( void )
 {
-	int i, j,chave;
+	int i, j,chave, posicao;
 
-	
+	GRF_ObterCorr(labirinto,&posicao,NULL);
+	printf("\n\n posicao: %d \n\n",posicao);
+	printf(" ");
 	for (i=0 ; i<2*LAB_largura+1; i++ )
 	{
 		printf("_");
@@ -97,6 +100,7 @@ void LAB_MostraLab ( void )
 
 	for (j=0; j<LAB_altura ; j++)
 	{
+		printf("%d", LAB_altura-j);
 		printf("|");
 
 		for (i=0; i<LAB_largura ; i++ )
@@ -104,11 +108,26 @@ void LAB_MostraLab ( void )
 			chave=ObterChaveCord(i,j);
 			if( GRF_ExisteAresta(labirinto,chave,ObterChaveDir(chave,'s')) == GRF_CondRetArestaJaExiste)
 			{
-				printf(" ");
+				if(chave != LAB_entrada && chave != LAB_saida && chave != posicao )
+				{
+					printf(" ");
+				}
+				else 
+				{
+					printf("+");
+				}
 			}
 			else
 			{
-				printf("_");
+				if(chave != LAB_entrada && chave != LAB_saida && chave != posicao )
+				{
+					printf("_");
+				}
+				else 
+				{
+					printf("%c",0xf1);
+				}
+
 			} /* if */
 
 			if( GRF_ExisteAresta(labirinto,chave,ObterChaveDir(chave,'l')) == GRF_CondRetArestaJaExiste)
@@ -123,9 +142,42 @@ void LAB_MostraLab ( void )
 		printf("\n");
 	}
 
+	printf("  ");
+	for (i=1 ; i<=LAB_largura; i++ )
+	{
+		printf("%d ",i);
+	}
+	printf("\n");
 
-} /* Fim função: LAB  &Criar Labirinto */
+} /* Fim função: LAB  &Mostrar Labirinto */
 
+/***************************************************************************
+*
+*  Função: LAB  &Criar Entrada
+*****/
+
+void LAB_CriarEntrada (int x, int y )
+{
+	int i, j;
+
+	TransfCord(x,y,&i,&j);
+	LAB_entrada=ObterChaveCord(i,j);
+
+} /* Fim função: LAB  &Criar Entrada */
+
+/***************************************************************************
+*
+*  Função: LAB  &Criar Saida
+*****/
+
+void LAB_CriarSaida (int x, int y )
+{
+	int i, j;
+
+	TransfCord(x,y,&i,&j);
+	LAB_saida=ObterChaveCord(i,j);
+
+} /* Fim função: LAB  &Criar Saida */
 
 /*****  Código das funções encapsuladas no módulo  *****/
 

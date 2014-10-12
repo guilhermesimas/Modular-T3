@@ -61,6 +61,9 @@
 void LAB_CriarLab (int altura, int largura);
 void LAB_CriarCaminho (int x, int y, char direcao);
 void LAB_MostraLab ( void );
+void LAB_CriarEntrada (int x, int y );
+void LAB_CriarSaida (int x, int y );
+
 
 
 /********** Fim do módulo de definição: GRF Grafo não orientado **********/

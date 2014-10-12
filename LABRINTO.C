@@ -276,7 +276,6 @@ void LAB_Carregar ( char * nome_entrada )
 	
 	while (fscanf (arq_entrada , "%d %c" , &chave_vertice , &direcao )==2)
 	{
-		
 		LAB_CriarCaminho ( chave_vertice%100+1, LAB_altura-chave_vertice/100, direcao ) ;
 	}/* while */
 	fclose (arq_entrada);
@@ -287,6 +286,19 @@ void LAB_Carregar ( char * nome_entrada )
 	return;
 
 } /* Fim função: LAB  &Carregar Labirinto */
+
+/***************************************************************************
+*
+*  Função: LAB  &Destruir Labirinto
+*****/
+
+void LAB_DestruirLab ( void )
+{
+	
+	GRF_DestroiGrafo(labirinto);
+	LAB_entrada=-1;
+	LAB_saida=-1;
+} /* Fim função: LAB  &Destruir Labirinto */
 
 /*****  Código das funções encapsuladas no módulo  *****/
 

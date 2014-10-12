@@ -61,6 +61,7 @@ int main (){
 		scanf("%d",&entrada);
 	}
 	
+	LAB_DestruirLab();
 
 	return 0;
 }
@@ -215,6 +216,7 @@ int ReobterEntrada ( void )
 void CriarLab ( void )
 {
 	int altura, largura, x,y;
+	LAB_DestruirLab();
 	printf("Criando Labirinto...\n\n");
 	Titulo();
 	printf("Quantas celulas de altura deve ter o labirinto? (Maximo de 38)\n");
@@ -264,6 +266,8 @@ void CriarLab ( void )
 }
 void ObtemPosicaoValida(int altura,int largura,int *x,int *y)
 {
+	*x=-1;
+	*y=-1;
 	scanf("%d,%d",x,y);
 	while (*x<1 || *x>largura )
 	{

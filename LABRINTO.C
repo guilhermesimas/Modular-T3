@@ -278,17 +278,17 @@ void LAB_Carregar ( char * nome_entrada )
 		printf( "Erro ao abrir o arquivo" );
 		return ;
 	}/* if */
-
 	fscanf (arq_entrada,"%d %d %d %d", &LAB_largura , &LAB_altura , &LAB_entrada , &LAB_saida );
-
 	LAB_CriarLab ( LAB_altura , LAB_largura );
 	
-	while (fscanf (arq_entrada , "%d %c" , &chave_vertice , &direcao ))
+	while (fscanf (arq_entrada , "%d %c" , &chave_vertice , &direcao )==2)
 	{
 		GRF_CriaAresta ( labirinto , chave_vertice , ObterChaveDir ( chave_vertice , direcao )  ) ;
 	}/* while */
-
 	fclose (arq_entrada);
+
+	GRF_AlteraCorrente(labirinto,LAB_entrada); /*  precisa por corrente na entrada */
+
 
 	return;
 

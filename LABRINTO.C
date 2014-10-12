@@ -294,8 +294,10 @@ void LAB_Carregar ( char * nome_entrada )
 
 void LAB_DestruirLab ( void )
 {
-	
-	GRF_DestroiGrafo(labirinto);
+	if (labirinto != NULL)
+	{
+		GRF_DestroiGrafo(labirinto);
+	}
 	LAB_entrada=-1;
 	LAB_saida=-1;
 } /* Fim função: LAB  &Destruir Labirinto */

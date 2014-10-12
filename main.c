@@ -14,6 +14,8 @@ void TelaPrbs ( void );
 int ReobterEntrada ( void );
 void CriarLab ( void );
 void ObtemPosicaoValida(int altura,int largura,int *x,int *y);
+void limpa_stdin(void);
+
 
 
 int main (){
@@ -22,7 +24,8 @@ int main (){
 	MenuPrincipal();
 
 	printf("Entre sua escolha: ");
-	scanf("%d",&entrada);
+	scanf(" %d",&entrada);
+	limpa_stdin();
 
 	while (entrada!=3) 
 	{
@@ -53,12 +56,15 @@ int main (){
 		else
 		{
 			entrada=ReobterEntrada();
+			
 		}
 		system("cls");
 		MenuPrincipal();
 
 		printf("Entre sua escolha: ");
 		scanf("%d",&entrada);
+		limpa_stdin();
+		
 	}
 	
 	LAB_DestruirLab();
@@ -121,6 +127,8 @@ void JogarLab ( void )
 			"5 - Voltar ao menu principal\n\n"
 			"Escolha uma das opcoes: ");
 	scanf("%d",&entrada);
+	limpa_stdin();
+
 	while (entrada<1 || entrada >5)
 	{
 		entrada=ReobterEntrada();
@@ -146,6 +154,8 @@ void JogarLab ( void )
 					"1 - SIM\n"
 					"2 - NAO\n");
 			scanf("%d", &resp);
+			limpa_stdin();
+
 			while (resp !=1 && resp!=2)
 			{
 				resp=ReobterEntrada();
@@ -167,6 +177,8 @@ void JogarLab ( void )
 				"5 - Voltar ao menu principal\n\n"
 				"Escolha uma das opcoes: ");
 		scanf("%d",&entrada);
+		limpa_stdin();
+
 		while (entrada<1 || entrada >5)
 			{
 				entrada=ReobterEntrada();
@@ -210,6 +222,8 @@ int ReobterEntrada ( void )
 	int entrada;
 	printf("Opcao invalida, por favor escolha uma das listadas acima: ");
 	scanf("%d", &entrada);
+	limpa_stdin();
+
 	return entrada;
 }
 
@@ -221,19 +235,23 @@ void CriarLab ( void )
 	Titulo();
 	printf("Quantas celulas de altura deve ter o labirinto? (Maximo de 38)\n");
 	scanf("%d",&altura);
+	limpa_stdin();
 	while(altura<=0 || altura >38)
 	{
 		printf("Altura invalida, forneca uma entre 1 e 38: ");
 		scanf("%d",&altura);
+		limpa_stdin();
 
 	}
 
 	printf("Quantas celulas de largura deve ter o labirinto? (Maximo de 38)\n");
 	scanf("%d",&largura);
+	limpa_stdin();
 	while(largura<=0 || largura >38)
 	{
 		printf("Largura invalida, forneca uma entre 1 e 38: ");
 		scanf("%d",&largura);
+		limpa_stdin();
 
 	}
 
@@ -269,14 +287,26 @@ void ObtemPosicaoValida(int altura,int largura,int *x,int *y)
 	*x=-1;
 	*y=-1;
 	scanf("%d,%d",x,y);
+	limpa_stdin();
 	while (*x<1 || *x>largura )
 	{
 		printf("Posicao x invalida, forneca uma coordenada entre 1 e %d: ", largura);
 		scanf("%d",x);
+		limpa_stdin();
 	}
 	while ( *y<1 || *y>altura)
 	{
 		printf("Posicao y invalida, forneca uma coordenada entre 1 e %d: ", altura);
 		scanf("%d",y);
+		limpa_stdin();
 	}
+}
+
+void limpa_stdin(void)
+{
+    int c;
+
+    do {
+        c = getchar();
+    } while (c != '\n' && c != EOF);
 }

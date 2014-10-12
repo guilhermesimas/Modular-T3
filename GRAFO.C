@@ -622,7 +622,10 @@
 		tpVertice* ptemp = (tpVertice*) pVertice;
 
 	    LIS_DestruirLista(ptemp->arestas);
-		ptemp->ExcluirValor(ptemp->pValor);
+		if (ptemp->ExcluirValor!=NULL)
+		{
+			ptemp->ExcluirValor(ptemp->pValor);
+		} /* if */
 		free(pVertice);
 
    } /* Fim função: GRF  -Destruir vértice */

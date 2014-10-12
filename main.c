@@ -11,6 +11,7 @@ void JogarLab ( void );
 char ConvDir (int cod);
 void TelaPrbs ( void );
 int ReobterEntrada ( void );
+void CriarLab ( void );
 
 int main (){
 	int entrada;
@@ -209,5 +210,8 @@ void CriarLab ( void )
 
 	LAB_CriarLab(input1,input2);
 
-	system("cls"
+	system("cls");
+	LAB_MostraLab();
+
+	system("pause");
 }

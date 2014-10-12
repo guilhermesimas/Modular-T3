@@ -89,7 +89,7 @@ void LAB_MostraLab ( void )
 
 	GRF_ObterCorr(labirinto,&posicao,NULL);
 	
-	printf(" ");
+	printf("  ");
 	for (i=0 ; i<2*LAB_largura+1; i++ )
 	{
 		printf("_");
@@ -101,6 +101,8 @@ void LAB_MostraLab ( void )
 	for (j=0; j<LAB_altura ; j++)
 	{
 		printf("%d", LAB_altura-j);
+		if (LAB_altura-j<10)
+			printf(" ");
 		printf("|");
 
 		for (i=0; i<LAB_largura ; i++ )
@@ -142,10 +144,16 @@ void LAB_MostraLab ( void )
 		printf("\n");
 	}
 
-	printf("  ");
+	printf("   ");
 	for (i=1 ; i<=LAB_largura; i++ )
 	{
-		printf("%d ",i);
+		printf("%d",i);
+		if (i<10)
+		{
+			printf(" ");
+		}
+		else
+			printf("");
 	}
 	printf("\n");
 

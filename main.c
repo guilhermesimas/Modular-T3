@@ -116,6 +116,10 @@ void JogarLab ( void )
 			"5 - Voltar ao menu principal\n\n"
 			"Escolha uma das opcoes: ");
 	scanf("%d",&entrada);
+	while (entrada<1 || entrada >5)
+	{
+		entrada=ReobterEntrada();
+	}
 
 	while ( 1 )
 	{
@@ -147,13 +151,7 @@ void JogarLab ( void )
 			}
 
 		}
-		else
-		{
-			while (entrada<1 || entrada >5)
-			{
-				entrada=ReobterEntrada();
-			}
-		}
+		
 		system("cls");
 		LAB_MostraLab();
 
@@ -164,6 +162,10 @@ void JogarLab ( void )
 				"5 - Voltar ao menu principal\n\n"
 				"Escolha uma das opcoes: ");
 		scanf("%d",&entrada);
+		while (entrada<1 || entrada >5)
+			{
+				entrada=ReobterEntrada();
+			}
 	}
 }
 
@@ -171,11 +173,11 @@ char ConvDir (int cod)
 {
 	if (cod == 1)
 	{
-		return 'n';
+		return 's';
 	}
 	else if (cod == 2)
 	{
-		return 's';
+		return 'n';
 	}
 	else if (cod == 3)
 	{
@@ -190,7 +192,12 @@ char ConvDir (int cod)
 void TelaPrbs ( void )
 {
 	system("cls");
-	printf("\n\n\n\n\t\t\t\t\tPARABENS!!!\n\n\n\n\n\n");
+	printf("\n\n\t _____        _____            ____  ______ _   _  _____ _ _ \n"
+			"\t|  __ \\ /\\   |  __ \\     /\\   |  _ \\|  ____| \\ | |/ ____| | |\n"
+			"\t| |__) /  \\  | |__) |   /  \\  | |_) | |__  |  \\| | (___ | | |\n"
+			"\t|  ___/ /\\ \\ |  _  /   / /\\ \\ |  _ <|  __| | . ` |\\___ \\| | |\n"
+			"\t| |  / ____ \\| | \\ \\  / ____ \\| |_) | |____| |\\  |____) |_|_|\n"
+			"\t|_| /_/    \\_\\_|  \\_\\/_/    \\_\\____/|______|_| \\_|_____/(_|_)\n\n\n");
 	system("pause");
 }
 int ReobterEntrada ( void )

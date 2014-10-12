@@ -193,14 +193,15 @@ void LAB_CriarSaida (int x, int y )
 
 int LAB_Andar (char direcao )
 {
-	int chave_prox, chave;
+	int chave_prox, chave,ret;
 
 	GRF_ObterCorr(labirinto,&chave,NULL);
 	chave_prox=ObterChaveDir(chave, direcao);
 
-	GRF_IrVizinho(labirinto, chave_prox);
+	ret=GRF_IrVizinho(labirinto, chave_prox);
 
-	if (chave_prox==LAB_saida)
+
+	if (ret==GRF_CondRetOK && chave_prox==LAB_saida)
 	{
 		return 1;
 	}

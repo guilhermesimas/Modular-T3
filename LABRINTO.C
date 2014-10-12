@@ -88,7 +88,7 @@ void LAB_MostraLab ( void )
 	int i, j,chave, posicao;
 
 	GRF_ObterCorr(labirinto,&posicao,NULL);
-	printf("\n\n posicao: %d \n\n",posicao);
+	
 	printf(" ");
 	for (i=0 ; i<2*LAB_largura+1; i++ )
 	{
@@ -162,6 +162,7 @@ void LAB_CriarEntrada (int x, int y )
 
 	TransfCord(x,y,&i,&j);
 	LAB_entrada=ObterChaveCord(i,j);
+	GRF_AlteraCorrente(labirinto,LAB_entrada);
 
 } /* Fim função: LAB  &Criar Entrada */
 

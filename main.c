@@ -7,6 +7,7 @@
 
 void InicializaLAB (void );
 void MenuPrincipal ( void ) ;
+void JogarLab ( void );
 
 int main (){
 	int entrada;
@@ -33,6 +34,7 @@ int main (){
 		{
 			system("cls");
 			InicializaLAB();
+			JogarLab();
 			LAB_MostraLab();
 			system("pause");
 		}
@@ -86,4 +88,51 @@ void InicializaLAB (void ){
 
 	LAB_CriarEntrada(1,1);
 	LAB_CriarSaida(3,3);
+}
+void JogarLab ( void )
+{
+	int entrada;
+	LAB_MostraLab();
+
+	printf("\n\n1 - Mover-se para Sul\n"
+			"2 - Mover-se para Norte\n"
+			"3 - Mover-se para Oeste\n"
+			"4 - Mover-se para Leste\n"
+			"5 - Voltar ao menu principal\n\n"
+			"Escolha uma das opcoes: ");
+	scanf("%d",&entrada);
+
+	while ( 1 )
+	{
+		if (entrada >=1 && entrada <= 4)
+		{
+
+		}
+
+		else if (entrada ==5)
+		{
+			int resp;
+			printf("Tem certeza? O progresso de seu jogo sera perdido.\n"
+					"1 - SIM\n"
+					"2 - NAO\n");
+			scanf("%d", &resp);
+			while (resp !=1 && resp!=2)
+			{
+				printf("Opção inválida, por favor escolha uma das listadas acima: ");
+				scanf("%d", &resp);
+			}
+			if (resp == 1 )
+			{
+				return; ///////////////////////////////////////////////////////////////////////////
+			}
+
+		}
+		else
+		{
+
+		}
+		
+	}
+
+
 }

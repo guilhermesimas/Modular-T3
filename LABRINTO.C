@@ -17,7 +17,7 @@
 *
 ***************************************************************************/
 #include <stdio.h>
-
+#include <stdlib.h>
 
 #include "LABIRINTO.H"
 #include "GRAFO.H"
@@ -208,6 +208,88 @@ int LAB_Andar (char direcao )
 	return 0;
 
 } /* Fim função: LAB  &Andar */
+
+/***************************************************************************
+*
+*  Função: LAB  &Salvar Labirinto
+*****/
+
+void LAB_Salvar ( char * nome_saida )
+{
+	int i , j ;
+	int chave_vertice ;
+	FILE * arq_saida ;
+
+	arq_saida = fopen ( nome_saida , "w" ) ;
+
+	if ( arq_saida == NULL )
+	{
+		printf(" Erro ao criar arquivo. ") ;
+		return ;
+	}
+
+	fprintf ( arq_saida , "%d %d %d %d\n" , LAB_largura , LAB_altura , LAB_entrada , LAB_saida ) ;
+
+	for ( j = 0 ; j < LAB_altura ; j++ )
+	{
+		for ( i = 0 ; j < LAB_largura ; j++ )
+		{
+			chave_vertice = ObterChaveCord ( i , j ) ;
+
+			if ( GRF_ExisteVertice ( labirinto , chave_vertice ) == GRF_CondRetVerticeJaExiste )
+			{
+				
+				if( GRF_ExisteAresta ( labirinto , chave_vertice , ObterChaveDir ( chave_vertice , 'L' ) ) == GRF_CondRetArestaJaExiste )
+				{
+					fprintf ( arq_saida , "%d %c" , chave_vertice , 'L' ) ;
+				}
+				if( GRF_ExisteAresta ( labirinto , chave_vertice , ObterChaveDir ( chave_vertice , 'S' ) ) == GRF_CondRetArestaJaExiste )
+				{
+					fprintf ( arq_saida , "%d %c" , chave_vertice , 'S' ) ;
+				}
+			}
+		}
+	}/* for */
+
+	fclose ( arq_saida ) ;
+
+	return;
+
+} /* Fim função: LAB  &Salvar Labirinto */
+
+/***************************************************************************
+*
+*  Função: LAB  &Carregar Labirinto
+*****/
+
+void LAB_Carregar ( char * nome_entrada )
+{
+	int chave_vertice ;
+	char direcao ;
+	FILE * arq_entrada ;
+
+	arq_entrada = fopen ( nome_entrada , "r" ) ;
+
+	if ( arq_entrada == NULL )
+	{
+		printf( "Erro ao abrir o arquivo" );
+		return ;
+	}/* if */
+
+	fscanf (arq_entrada,"%d %d %d %d", &LAB_largura , &LAB_altura , &LAB_entrada , &LAB_saida );
+
+	LAB_CriarLab ( LAB_altura , LAB_largura );
+	
+	while (fscanf (arq_entrada , "%d %c" , &chave_vertice , &direcao ))
+	{
+		GRF_CriaAresta ( labirinto , chave_vertice , ObterChaveDir ( chave_vertice , direcao )  ) ;
+	}/* while */
+
+	fclose (arq_entrada);
+
+	return;
+
+} /* Fim função: LAB  &Carregar Labirinto */
 
 /*****  Código das funções encapsuladas no módulo  *****/
 

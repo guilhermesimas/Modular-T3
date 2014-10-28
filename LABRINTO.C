@@ -35,7 +35,7 @@ static GRF_tppGrafo labirinto;
 int ObterChaveCord (int i, int j);
 int ObterChaveDir (int chave, char direcao);
 void TransfCord (int x, int y, int * i, int *j);
-
+void ObterCoordChave (int chave , int * x, int * y);
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -302,6 +302,52 @@ void LAB_DestruirLab ( void )
 	LAB_saida=-1;
 } /* Fim função: LAB  &Destruir Labirinto */
 
+/***************************************************************************
+*
+*  Função: LAB  &Solucionar Labirinto
+*****/
+
+void LAB_SolucionarLab ( int ** buffer_solucao )
+{
+	int chaveAtual , * aux , i , *temp , x , y ;
+
+	if (labirinto == NULL)
+	{
+		exit(1);
+	}
+
+	if(GRF_ObterCorr (labirinto,&chaveAtual,NULL) != GRF_CondRetOK )
+	{
+
+	}
+
+	aux = (int *) malloc (LAB_altura * LAB_largura * ( sizeof ( int ) ) ) ;	
+
+	if(GRF_ObtemCaminho (labirinto , chaveAtual , LAB_saida , aux ) == GRF_CondRetVerticesDesconexos )
+	{
+		printf ("Não há caminho") ;
+	}
+
+	buffer_solucao = ( int ** )malloc ( LAB_largura * LAB_altura * sizeof ( int * ) ) ;
+	temp = ( int * )malloc ( LAB_largura * LAB_altura * 2 * sizeof ( int ) ) ;
+	for (i = 0; i < LAB_largura * LAB_altura; i++) 
+	{
+		buffer_solucao[i] = temp + (i * 2);
+	}
+
+	for( i=0 ; aux[i]!=-1 ; i++ )
+	{
+		ObterCoordChave ( chaveAtual , &x , &y ) ;
+		buffer_solucao[i][0] = x ;
+		buffer_solucao[i][1] = y ;
+	}
+
+	buffer_solucao[i][0] = -1 ;
+	buffer_solucao[i][1] = -1 ;
+
+	return;
+} /* Fim função: LAB  &Solucionar Labirinto */
+
 /*****  Código das funções encapsuladas no módulo  *****/
 
 /***********************************************************************
@@ -366,4 +412,18 @@ void TransfCord (int x, int y, int * i, int *j)
 {
 	*i=x-1;
 	*j=LAB_altura-y;
+}
+
+/***********************************************************************
+*
+*  $FC Função: LAB
+*
+*  $ED Descrição da função
+*     
+*
+***********************************************************************/
+void ObterCoordChave (int chave , int * x, int * y)
+{
+	*x = chave%100 + 1 ;
+	*y = LAB_altura - chave/100 ;
 }

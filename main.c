@@ -29,12 +29,13 @@ int main (){
 
 	while (entrada!=4) 
 	{
+		/* tratar crair labirinto */
 		if(entrada==1)
 		{
 			system("cls");
 			CriarLab();
-		}
-		
+		} /* if */
+		/* tratar carregar arquivo */
 		else if (entrada == 2)
 		{
 			char arq[35];
@@ -42,27 +43,39 @@ int main (){
 			printf("\nQual o nome do arquivo? (maximo de 30 caracteres)\n");
 			scanf(" %30[^\n]",arq);
 			strcat(arq,".lab");
-			LAB_Carregar(arq);
-
-			system("cls");
-			JogarLab();
+			if(LAB_Carregar(arq)==LAB_CondRetErroArquivo)
+			{
+				printf("\nERRO: Erro ao abrir arquivo.\n\n");
+				system("pause");
+			}
+			else
+			{
+				system("cls");
+				JogarLab();
+			} /* if */
 			
 		}
-
-		
+		/* tratar abrir arquivo demo */
 		else if (entrada == 3)
 		{
-			system("cls");
-			LAB_Carregar("lab_demo");
 
-			system("cls");
-			JogarLab();
+			if(LAB_Carregar("lab_demo.lab")==LAB_CondRetErroArquivo)
+			{
+				printf("\nERRO: Erro ao abrir arquivo.\n\n");
+				system("pause");
+			}
+			else
+			{
+				system("cls");
+				JogarLab();
+			} /* if */
+
 		}
 
 		else
 		{
 			entrada=ReobterEntrada();
-		}
+		} /* if */
 
 		system("cls");
 		MenuPrincipal();
@@ -70,9 +83,9 @@ int main (){
 		printf("Entre sua escolha: ");
 		scanf("%d",&entrada);
 		limpa_stdin();
-		
-	}
-	
+
+	} /* while */
+
 	LAB_DestruirLab();
 
 	return 0;
@@ -136,7 +149,7 @@ void JogarLab ( void )
 	while (entrada<1 || entrada >6)
 	{
 		entrada=ReobterEntrada();
-	}
+	} /* while */
 
 	while ( 1 )
 	{
@@ -144,9 +157,10 @@ void JogarLab ( void )
 		{
 			if (LAB_Andar(ConvDir(entrada))==LAB_CondRetSaida)
 			{
+				LAB_DestruirLab();
 				TelaPrbs();
 				return;
-			}
+			} /* if */
 		}
 		else if(entrada == 5)
 		{
@@ -161,7 +175,7 @@ void JogarLab ( void )
 				{
 					printf("(%d,%d) ",solucao[i][0],solucao[i][1]);
 					i++;
-				}
+				} /* while */
 				printf("\n\n");
 				system("pause");
 			}
@@ -174,7 +188,7 @@ void JogarLab ( void )
 			{
 				printf("O retorno foi: %d",ret);
 				system("pause");
-			}
+			} /* if */
 		}
 
 		else if (entrada ==6)
@@ -191,13 +205,14 @@ void JogarLab ( void )
 			while (resp !=1 && resp!=2)
 			{
 				resp=ReobterEntrada();
-			}
+			} /* while */
 			if (resp == 1 )
 			{
+				LAB_DestruirLab();
 				return; 
-			}
+			} /* if */
 
-		}
+		} /* if */
 		
 		system("cls");
 		LAB_MostraLab();
@@ -215,7 +230,7 @@ void JogarLab ( void )
 		while (entrada<1 || entrada >6)
 		{
 			entrada=ReobterEntrada();
-		}
+		} /* while */
 	}
 }
 
@@ -236,7 +251,7 @@ char ConvDir (int cod)
 	else
 	{
 		return 'l';
-	}
+	} /* if */
 
 }
 void TelaPrbs ( void )
@@ -275,8 +290,7 @@ void CriarLab ( void )
 		printf("Altura invalida, forneca uma entre 1 e 38: ");
 		scanf("%d",&altura);
 		limpa_stdin();
-
-	}
+	} /* while */
 
 	printf("Quantas celulas de largura deve ter o labirinto? (Maximo de 38)\n");
 	scanf("%d",&largura);
@@ -286,8 +300,7 @@ void CriarLab ( void )
 		printf("Largura invalida, forneca uma entre 1 e 38: ");
 		scanf("%d",&largura);
 		limpa_stdin();
-
-	}
+	} /* while */
 
 	LAB_CriarLab(altura,largura);
 
@@ -318,7 +331,7 @@ void CriarLab ( void )
 	while (entrada<1 || entrada >3)
 	{
 		entrada=ReobterEntrada();
-	}
+	} /* while */
 
 	while ( 1 )
 	{
@@ -340,21 +353,21 @@ void CriarLab ( void )
 			while (entrada<1 || entrada >5)
 			{
 				entrada=ReobterEntrada();
-			}
+			} /* while */
 			while (entrada !=5)
 			{
 				if (LAB_CriarCaminho(x,y,ConvDir(entrada))== LAB_CondRetForaLab)
 				{
 					printf("Nao e possivel criar um caminho para fora do labirinto!!\n\n");
-				}
+				} /* if */
 				printf("Escolha uma das opcoes: ");
 				scanf("%d",&entrada);
 				limpa_stdin();
 				while (entrada<1 || entrada >5)
 				{
 					entrada=ReobterEntrada();
-				}
-			}
+				} /* while */
+			} /* while */
 		}
 		else if (entrada == 2)
 		{
@@ -371,7 +384,7 @@ void CriarLab ( void )
 			while (resp !=1 && resp!=2)
 			{
 				resp=ReobterEntrada();
-			}
+			} /* while */
 
 			if (resp == 1 )
 			{
@@ -381,8 +394,9 @@ void CriarLab ( void )
 				strcat(arq,".lab");
 
 				LAB_Salvar(arq);
+				LAB_DestruirLab();
 				return; 
-			}
+			} /* if */
 		}
 		else if (entrada == 3)
 		{
@@ -398,13 +412,14 @@ void CriarLab ( void )
 			while (resp !=1 && resp!=2)
 			{
 				resp=ReobterEntrada();
-			}
+			} /* while */
 
 			if (resp == 1 )
 			{
+				LAB_DestruirLab();
 				return; 
-			}
-		}
+			} /* if */
+		} /* if */
 
 	
 		system("cls");
@@ -422,7 +437,7 @@ void CriarLab ( void )
 		while (entrada<1 || entrada >3)
 		{
 			entrada=ReobterEntrada();
-		}
+		} /* while */
 	}
 }
 void ObtemPosicaoValida(int altura,int largura,int *x,int *y)
@@ -436,13 +451,13 @@ void ObtemPosicaoValida(int altura,int largura,int *x,int *y)
 		printf("Posicao x invalida, forneca uma coordenada entre 1 e %d: ", largura);
 		scanf("%d",x);
 		limpa_stdin();
-	}
+	} /* while */
 	while ( *y<1 || *y>altura)
 	{
 		printf("Posicao y invalida, forneca uma coordenada entre 1 e %d: ", altura);
 		scanf("%d",y);
 		limpa_stdin();
-	}
+	} /* while */
 }
 
 void limpa_stdin(void)

@@ -51,7 +51,7 @@ LAB_tpCondRet LAB_CriarLab (int altura, int largura)
 	if(GRF_CriarGrafo(&labirinto,NULL)==GRF_CondRetFaltouMemoria)
 	{
 		return LAB_CondRetMemoria;
-	}
+	} /* if */
 	LAB_altura=altura;
 	LAB_largura=largura;
 
@@ -74,7 +74,7 @@ LAB_tpCondRet LAB_CriarCaminho (int x, int y, char direcao)
 	if (chave2/100<0 || chave2/100>=LAB_altura ||chave2%100<0 || chave2%100>=LAB_largura)
 	{
 		return LAB_CondRetForaLab;
-	}
+	} /* if */
 
 	GRF_CriaVertice(labirinto,NULL,chave1);
 	GRF_CriaVertice(labirinto,NULL,chave2);
@@ -96,13 +96,13 @@ LAB_tpCondRet LAB_MostraLab ( void )
 	if(GRF_ObterCorr(labirinto,&posicao,NULL)==GRF_CondRetGrafoNaoExiste)
 	{
 		return LAB_CondRetLabirintoNaoExiste;
-	}
+	} /* if */
 	
 	printf("  ");
 	for (i=0 ; i<2*LAB_largura+1; i++ )
 	{
 		printf("_");
-	}
+	} /* for */
 
 
 	printf("\n");
@@ -111,7 +111,9 @@ LAB_tpCondRet LAB_MostraLab ( void )
 	{
 		printf("%d", LAB_altura-j);
 		if (LAB_altura-j<10)
+		{
 			printf(" ");
+		} /* if */
 		printf("|");
 
 		for (i=0; i<LAB_largura ; i++ )
@@ -126,7 +128,7 @@ LAB_tpCondRet LAB_MostraLab ( void )
 				else 
 				{
 					printf("+");
-				}
+				} /* if */
 			}
 			else
 			{
@@ -137,7 +139,7 @@ LAB_tpCondRet LAB_MostraLab ( void )
 				else 
 				{
 					printf("%c",0xf1);
-				}
+				} /* if */
 
 			} /* if */
 
@@ -149,19 +151,23 @@ LAB_tpCondRet LAB_MostraLab ( void )
 			{
 				printf("|");
 			} /* if */
-		}
+		} /* for */
 		printf("\n");
-	}
+	} /* for */
 
 	printf("   ");
 	for (i=1 ; i<=LAB_largura; i++ )
 	{
 		printf("%d",i%10);
 		if (i%10==9)
+		{
 			printf("%d",(i+1)/10);
+		}
 		else
+		{
 			printf(" ");
-	}
+		} /* if */
+	} /* for */
 	printf("\n");
 	return LAB_CondRetOK;
 } /* Fim função: LAB  &Mostrar Labirinto */
@@ -180,8 +186,8 @@ LAB_tpCondRet LAB_CriarEntrada (int x, int y )
 	if(GRF_CriaVertice(labirinto,NULL,LAB_entrada)==GRF_CondRetGrafoNaoExiste)
 	{
 		return LAB_CondRetLabirintoNaoExiste ;
-	}
-
+	} /* if */
+	printf("VAI ALTERAR CORR PRA ENT\n\n");
 	GRF_AlteraCorrente(labirinto,LAB_entrada);
 
 	return LAB_CondRetOK;
@@ -202,7 +208,7 @@ LAB_tpCondRet LAB_CriarSaida (int x, int y )
 	if(GRF_CriaVertice(labirinto,NULL,LAB_saida)==GRF_CondRetGrafoNaoExiste)
 	{
 		return LAB_CondRetLabirintoNaoExiste ;
-	}
+	} /* if */
 
 	return LAB_CondRetOK;
 
@@ -221,7 +227,7 @@ LAB_tpCondRet LAB_Andar (char direcao )
 	if(GRF_ObterCorr(labirinto,&chave,NULL)==GRF_CondRetGrafoNaoExiste)
 	{
 		return LAB_CondRetLabirintoNaoExiste;
-	}
+	} /* if */
 
 	chave_prox=ObterChaveDir(chave, direcao);
 	ret=GRF_IrVizinho(labirinto, chave_prox);
@@ -230,13 +236,13 @@ LAB_tpCondRet LAB_Andar (char direcao )
 	if(ret==GRF_CondRetVerticesDesconexos)
 	{
 		return LAB_CondRetNaoExisteCaminho ;
-	}
+	} /* if */
 	
 	/* chegou na saida */
 	if (ret==GRF_CondRetOK && chave_prox==LAB_saida)
 	{
 		return LAB_CondRetSaida;
-	}
+	} /* if */
 
 	return LAB_CondRetOK;
 
@@ -256,15 +262,14 @@ LAB_tpCondRet LAB_Salvar ( char * nome_saida )
 	if(labirinto==NULL)
 	{
 		return LAB_CondRetLabirintoNaoExiste;
-	}
+	} /* if */
 	
 	arq_saida = fopen ( nome_saida , "w" ) ;
 
 	if ( arq_saida == NULL )
 	{
-		printf(" Erro ao criar arquivo. ") ;
 		return LAB_CondRetErroArquivo;
-	}
+	} /* if */
 
 	fprintf ( arq_saida , "%d %d %d %d\n" , LAB_largura , LAB_altura , LAB_entrada , LAB_saida ) ;
 
@@ -278,13 +283,13 @@ LAB_tpCondRet LAB_Salvar ( char * nome_saida )
 				if( GRF_ExisteAresta ( labirinto , chave_vertice , ObterChaveDir ( chave_vertice , 'L' ) ) == GRF_CondRetArestaJaExiste )
 				{
 					fprintf ( arq_saida , "%d %c\n" , chave_vertice , 'L' ) ;
-				}
+				} /* if */
 				if( GRF_ExisteAresta ( labirinto , chave_vertice , ObterChaveDir ( chave_vertice , 'S' ) ) == GRF_CondRetArestaJaExiste )
 				{
 					fprintf ( arq_saida , "%d %c\n" , chave_vertice , 'S' ) ;
-				}
-		}
-	}/* for */
+				} /* if */
+		} /* for */
+	} /* for */
 
 	fclose ( arq_saida ) ;
 
@@ -307,9 +312,8 @@ LAB_tpCondRet LAB_Carregar ( char * nome_entrada )
 
 	if ( arq_entrada == NULL )
 	{
-		printf( "Erro ao abrir o arquivo" );
 		return LAB_CondRetErroArquivo;
-	}/* if */
+	} /* if */
 	fscanf (arq_entrada,"%d %d %d %d", &LAB_largura , &LAB_altura , &LAB_entrada , &LAB_saida );
 	LAB_CriarLab ( LAB_altura , LAB_largura );
 	
@@ -322,7 +326,7 @@ LAB_tpCondRet LAB_Carregar ( char * nome_entrada )
 	while (fscanf (arq_entrada , "%d %c" , &chave_vertice , &direcao )==2)
 	{
 		LAB_CriarCaminho ( chave_vertice%100+1, LAB_altura-chave_vertice/100, direcao ) ;
-	}/* while */
+	} /* while */
 	fclose (arq_entrada);
 
 	GRF_AlteraCorrente(labirinto,LAB_entrada); /*  precisa por corrente na entrada */
@@ -342,9 +346,10 @@ void LAB_DestruirLab ( void )
 	if (labirinto != NULL)
 	{
 		GRF_DestroiGrafo(labirinto);
-	}
+	} /* if */
 	LAB_entrada=-1;
 	LAB_saida=-1;
+	labirinto=NULL;
 } /* Fim função: LAB  &Destruir Labirinto */
 
 /***************************************************************************
@@ -360,36 +365,36 @@ LAB_tpCondRet LAB_SolucionarLab ( int *** buffer_solucao )
 	if(GRF_ObterCorr (labirinto,&chaveAtual,NULL) == GRF_CondRetGrafoNaoExiste )
 	{
 		return LAB_CondRetLabirintoNaoExiste;
-	}
+	} /* if */
 
 	aux = (int *) malloc ((LAB_altura * LAB_largura + 1) * ( sizeof ( int ) )) ;	
 	if(aux==NULL)
 	{
 		return LAB_CondRetMemoria;
-	}
+	} /* if */
 
 	if(GRF_ObtemCaminho (labirinto , chaveAtual , LAB_saida , aux ) == GRF_CondRetVerticesDesconexos )
 	{
 		return LAB_CondRetNaoExisteCaminho;
-	}
+	} /* if */
 	(*buffer_solucao) = ( int ** )malloc ( (LAB_largura * LAB_altura + 1) * sizeof ( int * ) ) ;
 	temp = ( int * )malloc ( (LAB_largura * LAB_altura + 1) * 2 * sizeof ( int ) ) ;
 	if(buffer_solucao==NULL || temp==NULL)
 	{
 		return LAB_CondRetMemoria;
-	}
+	} /* if */
 
 	for (i = 0; i < LAB_largura * LAB_altura+1; i++) 
 	{
 		(*buffer_solucao)[i] = temp + (i * 2);
-	}
+	} /* for */
 
 	for( i=0 ; aux[i]!=-1 ; i++ )
 	{
 		ObterCoordChave ( aux[i] , &x , &y ) ;
 		(*buffer_solucao)[i][0] = x ;
 		(*buffer_solucao)[i][1] = y ;
-	}
+	} /* for */
 
 	(*buffer_solucao)[i][0] = -1 ;
 	(*buffer_solucao)[i][1] = -1 ;
@@ -443,7 +448,7 @@ int ObterChaveDir (int chave, char direcao)
 	else if (direcao=='o' || direcao=='O')
 	{
 		return chave-1;
-	}
+	} /* if */
 
 	return -1;
 

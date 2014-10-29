@@ -33,15 +33,20 @@ int main (){
 		{
 			system("cls");
 			CriarLab();
-			/******************   ver cirar lab pra interface de usuario que falta  *******************/
 		}
 		
 		else if (entrada == 2)
 		{
+			char arq[35];
+			
+			printf("\nQual o nome do arquivo? (maximo de 30 caracteres)\n");
+			scanf(" %30[^\n]",arq);
+			strcat(arq,".lab");
+			LAB_Carregar(arq);
+
 			system("cls");
-			LAB_Carregar("teste.lab");
 			JogarLab();
-			/************** Falta interface com usuario pedindo nome do arquivo  **************************/
+			
 		}
 
 		#ifdef _DEBUG
@@ -124,12 +129,13 @@ void JogarLab ( void )
 			"2 - Mover-se para Norte\n"
 			"3 - Mover-se para Oeste\n"
 			"4 - Mover-se para Leste\n"
-			"5 - Voltar ao menu principal\n\n"
+			"5 - Obter solucao\n"
+			"6 - Voltar ao menu principal\n\n"
 			"Escolha uma das opcoes: ");
 	scanf("%d",&entrada);
 	limpa_stdin();
 
-	while (entrada<1 || entrada >5)
+	while (entrada<1 || entrada >6)
 	{
 		entrada=ReobterEntrada();
 	}
@@ -144,8 +150,12 @@ void JogarLab ( void )
 				return;
 			}
 		}
+		else if(entrada == 5)
+		{
+			
+		}
 
-		else if (entrada ==5)
+		else if (entrada ==6)
 		{
 			int resp;
 			system("cls");
@@ -174,15 +184,16 @@ void JogarLab ( void )
 				"2 - Mover-se para Norte\n"
 				"3 - Mover-se para Oeste\n"
 				"4 - Mover-se para Leste\n"
-				"5 - Voltar ao menu principal\n\n"
+				"5 - Obter solucao\n"
+				"6 - Voltar ao menu principal\n\n"
 				"Escolha uma das opcoes: ");
 		scanf("%d",&entrada);
 		limpa_stdin();
 
-		while (entrada<1 || entrada >5)
-			{
-				entrada=ReobterEntrada();
-			}
+		while (entrada<1 || entrada >6)
+		{
+			entrada=ReobterEntrada();
+		}
 	}
 }
 
@@ -233,6 +244,7 @@ void CriarLab ( void )
 	LAB_DestruirLab();
 	printf("Criando Labirinto...\n\n");
 	Titulo();
+
 	printf("Quantas celulas de altura deve ter o labirinto? (Maximo de 38)\n");
 	scanf("%d",&altura);
 	limpa_stdin();
@@ -286,41 +298,93 @@ void CriarLab ( void )
 		entrada=ReobterEntrada();
 	}
 
-	while (entrada==1)
+	while ( 1 )
 	{
+		if (entrada ==1 )
+		{
+			printf("\nQual a celula? (x,y)\n");
+			ObtemPosicaoValida(altura,largura,&x,&y);
 
-		printf("\nQual a celula? (x,y)\n");
-		ObtemPosicaoValida(altura,largura,&x,&y);
 
-		
-		printf("\nSelecione uma direcao para o caminho:\n"
+			printf("\nSelecione uma direcao para o caminho:\n"
 				"1 - Caminho para Sul\n"
 				"2 - Caminho para Norte\n"
 				"3 - Caminho para Oeste\n"
 				"4 - Caminho para Leste\n"
 				"5 - Voltar\n"
 				"\nEscolha uma das opcoes: ");
-		scanf("%d",&entrada);
-		limpa_stdin();
-		while (entrada<1 || entrada >5)
-		{
-			entrada=ReobterEntrada();
-		}
-		while (entrada !=5)
-		{
-			if (LAB_CriarCaminho(x,y,ConvDir(entrada))== -1)
-			{
-				printf("Nao e possivel criar um caminho para fora do labirinto!!\n\n");
-			}
-			printf("Escolha uma das opcoes: ");
 			scanf("%d",&entrada);
 			limpa_stdin();
 			while (entrada<1 || entrada >5)
 			{
 				entrada=ReobterEntrada();
 			}
+			while (entrada !=5)
+			{
+				if (LAB_CriarCaminho(x,y,ConvDir(entrada))== -1)
+				{
+					printf("Nao e possivel criar um caminho para fora do labirinto!!\n\n");
+				}
+				printf("Escolha uma das opcoes: ");
+				scanf("%d",&entrada);
+				limpa_stdin();
+				while (entrada<1 || entrada >5)
+				{
+					entrada=ReobterEntrada();
+				}
+			}
+		}
+		else if (entrada == 2)
+		{
+		
+			int resp;
+			
+			printf("\nTem certeza que quer salvar e voltar ao menu principal?\n"
+					"Nao podera voltar a editar o labirinto.\n"
+					"1 - SIM\n"
+					"2 - NAO\n");
+			scanf("%d", &resp);
+			limpa_stdin();
+
+			while (resp !=1 && resp!=2)
+			{
+				resp=ReobterEntrada();
+			}
+
+			if (resp == 1 )
+			{
+				char arq[35];
+				printf("\nQual o nome do arquivo? (maximo de 30 caracteres)\n");
+				scanf(" %30[^\n]",arq);
+				strcat(arq,".lab");
+
+				LAB_Salvar(arq);
+				return; 
+			}
+		}
+		else if (entrada == 3)
+		{
+			int resp;
+			
+			printf("\nTem certeza que quer sair e voltar ao menu principal?\n"
+					"Perdera o labirinto criado.\n"
+					"1 - SIM\n"
+					"2 - NAO\n");
+			scanf("%d", &resp);
+			limpa_stdin();
+
+			while (resp !=1 && resp!=2)
+			{
+				resp=ReobterEntrada();
+			}
+
+			if (resp == 1 )
+			{
+				return; 
+			}
 		}
 
+	
 		system("cls");
 		printf("Criando Labirinto...\n\n");
 		LAB_MostraLab();
@@ -338,18 +402,6 @@ void CriarLab ( void )
 			entrada=ReobterEntrada();
 		}
 	}
-
-	if (entrada == 2)
-	{
-		char arq[35];
-		printf("\nQual o nome do arquivo? (maximo de 30 caracteres)\n");
-		scanf(" %30[^\n]",arq);
-		strcat(arq,".lab");
-
-		LAB_Salvar(arq);
-	}
-	/**********************   FALTA COISA AQUI      **********************************////////////////////////////////////////////////////////////
-	
 }
 void ObtemPosicaoValida(int altura,int largura,int *x,int *y)
 {

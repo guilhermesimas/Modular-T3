@@ -67,14 +67,14 @@
 *  $AS Assertivas de saída
 *
 ***********************************************************************/
-void LAB_CriarLab (int altura, int largura);
-int LAB_CriarCaminho (int x, int y, char direcao);
-void LAB_MostraLab ( void );
-void LAB_CriarEntrada (int x, int y );
-void LAB_CriarSaida (int x, int y );
-int LAB_Andar (char direcao );
-void LAB_Carregar ( char * nome_entrada );
-void LAB_Salvar ( char * nome_saida );
+LAB_tpCondRet LAB_CriarLab (int altura, int largura);
+LAB_tpCondRet LAB_CriarCaminho (int x, int y, char direcao);
+LAB_tpCondRet LAB_MostraLab ( void );
+LAB_tpCondRet LAB_CriarEntrada (int x, int y );
+LAB_tpCondRet LAB_CriarSaida (int x, int y );
+LAB_tpCondRet LAB_Andar (char direcao );
+LAB_tpCondRet LAB_Carregar ( char * nome_entrada );
+LAB_tpCondRet LAB_Salvar ( char * nome_saida );
 void LAB_DestruirLab ( void );
 
 

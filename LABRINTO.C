@@ -213,7 +213,7 @@ LAB_tpCondRet LAB_CriarSaida (int x, int y )
 *  Função: LAB  &Andar
 *****/
 
-int LAB_Andar (char direcao )
+LAB_tpCondRet LAB_Andar (char direcao )
 {
 	int chave_prox, chave,ret;
 
@@ -361,14 +361,23 @@ LAB_tpCondRet LAB_SolucionarLab ( int ** buffer_solucao )
 	}
 
 	aux = (int *) malloc (LAB_altura * LAB_largura * ( sizeof ( int ) ) ) ;	
+	if(aux==NULL)
+	{
+		return LAB_CondRetMemoria;
+	}
 
 	if(GRF_ObtemCaminho (labirinto , chaveAtual , LAB_saida , aux ) == GRF_CondRetVerticesDesconexos )
 	{
 		printf ("Não há caminho") ;
+		return LAB_CondRetNaoExisteCaminho;
 	}
 
 	buffer_solucao = ( int ** )malloc ( LAB_largura * LAB_altura * sizeof ( int * ) ) ;
 	temp = ( int * )malloc ( LAB_largura * LAB_altura * 2 * sizeof ( int ) ) ;
+	if(buffer_solucao==NULL || temp==NULL)
+	{
+		return LAB_CondRetMemoria;
+	}
 	for (i = 0; i < LAB_largura * LAB_altura; i++) 
 	{
 		buffer_solucao[i] = temp + (i * 2);

@@ -73,7 +73,7 @@ LAB_tpCondRet LAB_CriarCaminho (int x, int y, char direcao)
 
 	if (chave2/100<0 || chave2/100>=LAB_altura ||chave2%100<0 || chave2%100>=LAB_largura)
 	{
-		return LAB_CondRetNaoExisteCaminho;
+		return LAB_CondRetForaLab;
 	}
 
 	GRF_CriaVertice(labirinto,NULL,chave1);
@@ -217,19 +217,22 @@ LAB_tpCondRet LAB_Andar (char direcao )
 {
 	int chave_prox, chave,ret;
 
+	/* labirinto nao existe */
 	if(GRF_ObterCorr(labirinto,&chave,NULL)==GRF_CondRetGrafoNaoExiste)
 	{
 		return LAB_CondRetLabirintoNaoExiste;
 	}
-	chave_prox=ObterChaveDir(chave, direcao);
 
+	chave_prox=ObterChaveDir(chave, direcao);
 	ret=GRF_IrVizinho(labirinto, chave_prox);
 
+	/* nao existe caminho */
 	if(ret==GRF_CondRetVerticesDesconexos)
 	{
 		return LAB_CondRetNaoExisteCaminho ;
 	}
 	
+	/* chegou na saida */
 	if (ret==GRF_CondRetOK && chave_prox==LAB_saida)
 	{
 		return LAB_CondRetSaida;
@@ -271,8 +274,6 @@ LAB_tpCondRet LAB_Salvar ( char * nome_saida )
 		{
 			chave_vertice = ObterChaveCord ( i , j ) ;
 
-			//if ( GRF_ExisteVertice ( labirinto , chave_vertice ) == GRF_CondRetVerticeJaExiste )
-			//{
 				
 				if( GRF_ExisteAresta ( labirinto , chave_vertice , ObterChaveDir ( chave_vertice , 'L' ) ) == GRF_CondRetArestaJaExiste )
 				{
@@ -282,7 +283,6 @@ LAB_tpCondRet LAB_Salvar ( char * nome_saida )
 				{
 					fprintf ( arq_saida , "%d %c\n" , chave_vertice , 'S' ) ;
 				}
-		//	}
 		}
 	}/* for */
 
@@ -299,14 +299,9 @@ LAB_tpCondRet LAB_Salvar ( char * nome_saida )
 
 LAB_tpCondRet LAB_Carregar ( char * nome_entrada )
 {
-	int chave_vertice;
+	int chave_vertice,x,y;
 	char direcao ;
 	FILE * arq_entrada ;
-
-	if(labirinto==NULL)
-	{
-		return LAB_CondRetLabirintoNaoExiste;
-	}
 
 	arq_entrada = fopen ( nome_entrada , "r" ) ;
 
@@ -318,6 +313,12 @@ LAB_tpCondRet LAB_Carregar ( char * nome_entrada )
 	fscanf (arq_entrada,"%d %d %d %d", &LAB_largura , &LAB_altura , &LAB_entrada , &LAB_saida );
 	LAB_CriarLab ( LAB_altura , LAB_largura );
 	
+	ObterCoordChave(LAB_entrada,&x,&y);
+	LAB_CriarEntrada(x,y);
+
+	ObterCoordChave(LAB_saida,&x,&y);
+	LAB_CriarSaida(x,y);
+
 	while (fscanf (arq_entrada , "%d %c" , &chave_vertice , &direcao )==2)
 	{
 		LAB_CriarCaminho ( chave_vertice%100+1, LAB_altura-chave_vertice/100, direcao ) ;
@@ -351,16 +352,17 @@ void LAB_DestruirLab ( void )
 *  Função: LAB  &Solucionar Labirinto
 *****/
 
-LAB_tpCondRet LAB_SolucionarLab ( int ** buffer_solucao )
+LAB_tpCondRet LAB_SolucionarLab ( int *** buffer_solucao )
 {
 	int chaveAtual , * aux , i , *temp , x , y ;
+	
 
 	if(GRF_ObterCorr (labirinto,&chaveAtual,NULL) == GRF_CondRetGrafoNaoExiste )
 	{
 		return LAB_CondRetLabirintoNaoExiste;
 	}
 
-	aux = (int *) malloc (LAB_altura * LAB_largura * ( sizeof ( int ) ) ) ;	
+	aux = (int *) malloc ((LAB_altura * LAB_largura + 1) * ( sizeof ( int ) )) ;	
 	if(aux==NULL)
 	{
 		return LAB_CondRetMemoria;
@@ -368,30 +370,29 @@ LAB_tpCondRet LAB_SolucionarLab ( int ** buffer_solucao )
 
 	if(GRF_ObtemCaminho (labirinto , chaveAtual , LAB_saida , aux ) == GRF_CondRetVerticesDesconexos )
 	{
-		printf ("Não há caminho") ;
 		return LAB_CondRetNaoExisteCaminho;
 	}
-
-	buffer_solucao = ( int ** )malloc ( LAB_largura * LAB_altura * sizeof ( int * ) ) ;
-	temp = ( int * )malloc ( LAB_largura * LAB_altura * 2 * sizeof ( int ) ) ;
+	(*buffer_solucao) = ( int ** )malloc ( (LAB_largura * LAB_altura + 1) * sizeof ( int * ) ) ;
+	temp = ( int * )malloc ( (LAB_largura * LAB_altura + 1) * 2 * sizeof ( int ) ) ;
 	if(buffer_solucao==NULL || temp==NULL)
 	{
 		return LAB_CondRetMemoria;
 	}
-	for (i = 0; i < LAB_largura * LAB_altura; i++) 
+
+	for (i = 0; i < LAB_largura * LAB_altura+1; i++) 
 	{
-		buffer_solucao[i] = temp + (i * 2);
+		(*buffer_solucao)[i] = temp + (i * 2);
 	}
 
 	for( i=0 ; aux[i]!=-1 ; i++ )
 	{
-		ObterCoordChave ( chaveAtual , &x , &y ) ;
-		buffer_solucao[i][0] = x ;
-		buffer_solucao[i][1] = y ;
+		ObterCoordChave ( aux[i] , &x , &y ) ;
+		(*buffer_solucao)[i][0] = x ;
+		(*buffer_solucao)[i][1] = y ;
 	}
 
-	buffer_solucao[i][0] = -1 ;
-	buffer_solucao[i][1] = -1 ;
+	(*buffer_solucao)[i][0] = -1 ;
+	(*buffer_solucao)[i][1] = -1 ;
 
 	return LAB_CondRetOK;
 } /* Fim função: LAB  &Solucionar Labirinto */

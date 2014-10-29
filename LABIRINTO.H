@@ -47,6 +47,8 @@
 			   /* Erro ao abrir ou gerar o arquivo */
 		 LAB_CondRetSaida,
 			   /* Corrente se encontra na saída */
+		 LAB_CondRetForaLab,
+			   /* Caminho vai para fora da área do labirinto */
 		 LAB_CondRetMemoria
 			   /* Nao ha memoria suficiente para alocar a estrutura */
    } LAB_tpCondRet ;
@@ -74,7 +76,7 @@ LAB_tpCondRet LAB_CriarEntrada (int x, int y );
 LAB_tpCondRet LAB_CriarSaida (int x, int y );
 LAB_tpCondRet LAB_Andar (char direcao );
 LAB_tpCondRet LAB_Carregar ( char * nome_entrada );
-LAB_tpCondRet LAB_SolucionarLab ( int ** buffer_solucao );
+LAB_tpCondRet LAB_SolucionarLab ( int *** buffer_solucao );
 LAB_tpCondRet LAB_Salvar ( char * nome_saida );
 void LAB_DestruirLab ( void );
 

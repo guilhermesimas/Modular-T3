@@ -27,7 +27,7 @@ int main (){
 	scanf(" %d",&entrada);
 	limpa_stdin();
 
-	while (entrada!=3) 
+	while (entrada!=4) 
 	{
 		if(entrada==1)
 		{
@@ -49,20 +49,21 @@ int main (){
 			
 		}
 
-		#ifdef _DEBUG
-		else if (entrada == 4)
+		
+		else if (entrada == 3)
 		{
 			system("cls");
-			InicializaLAB();
+			LAB_Carregar("lab_demo");
+
+			system("cls");
 			JogarLab();
 		}
-		#endif
 
 		else
 		{
 			entrada=ReobterEntrada();
-			
 		}
+
 		system("cls");
 		MenuPrincipal();
 
@@ -96,11 +97,8 @@ void MenuPrincipal ( void ) {
 	printf("\t\t\tMENU PRINCIPAL\n"
 			"\t\t\t1 - Criar um labirinto\n"
 			"\t\t\t2 - Carregar um labirinto\n"
-			"\t\t\t3 - Sair\n");
-
-	#ifdef _DEBUG
-	printf("\t\t\t4 - Jogar labirinto pre-definido\n");
-	#endif
+			"\t\t\t3 - Jogar labirinto demo\n"
+			"\t\t\t4 - Sair\n");
 
 	printf("\n\n");
 }
@@ -129,7 +127,7 @@ void JogarLab ( void )
 			"2 - Mover-se para Norte\n"
 			"3 - Mover-se para Oeste\n"
 			"4 - Mover-se para Leste\n"
-			"5 - Obter solucao\n"
+			"5 - Ver caminho solucao\n"
 			"6 - Voltar ao menu principal\n\n"
 			"Escolha uma das opcoes: ");
 	scanf("%d",&entrada);
@@ -144,7 +142,7 @@ void JogarLab ( void )
 	{
 		if (entrada >=1 && entrada <= 4)
 		{
-			if (LAB_Andar(ConvDir(entrada)))
+			if (LAB_Andar(ConvDir(entrada))==LAB_CondRetSaida)
 			{
 				TelaPrbs();
 				return;
@@ -152,16 +150,31 @@ void JogarLab ( void )
 		}
 		else if(entrada == 5)
 		{
-			int i=0, j=0;
+			int i=1, j=0, ret;
 			int ** solucao;
-			LAB_SolucionarLab ( solucao );
-
-			while (solucao[i][0]!=-1)
-			{
-				printf("(%d,%d)",solucao[i][0],solucao[i][1]);
-				i++;
-			}
+			ret=LAB_SolucionarLab ( &solucao );
 			printf("\n");
+			if (ret == LAB_CondRetOK)
+			{
+				printf("O caminho ate a saida e: ");
+				while (solucao[i][0]!=-1)
+				{
+					printf("(%d,%d) ",solucao[i][0],solucao[i][1]);
+					i++;
+				}
+				printf("\n\n");
+				system("pause");
+			}
+			else if (ret == LAB_CondRetNaoExisteCaminho)
+			{
+				printf("Labirinto impossivel, nao existe caminho ate a saida!!\n\n");
+				system("pause");
+			}
+			else
+			{
+				printf("O retorno foi: %d",ret);
+				system("pause");
+			}
 		}
 
 		else if (entrada ==6)
@@ -193,7 +206,7 @@ void JogarLab ( void )
 				"2 - Mover-se para Norte\n"
 				"3 - Mover-se para Oeste\n"
 				"4 - Mover-se para Leste\n"
-				"5 - Obter solucao\n"
+				"5 - Ver caminho solucao\n"
 				"6 - Voltar ao menu principal\n\n"
 				"Escolha uma das opcoes: ");
 		scanf("%d",&entrada);
@@ -330,7 +343,7 @@ void CriarLab ( void )
 			}
 			while (entrada !=5)
 			{
-				if (LAB_CriarCaminho(x,y,ConvDir(entrada))== -1)
+				if (LAB_CriarCaminho(x,y,ConvDir(entrada))== LAB_CondRetForaLab)
 				{
 					printf("Nao e possivel criar um caminho para fora do labirinto!!\n\n");
 				}

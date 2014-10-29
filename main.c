@@ -152,7 +152,16 @@ void JogarLab ( void )
 		}
 		else if(entrada == 5)
 		{
-			
+			int i=0, j=0;
+			int ** solucao;
+			LAB_SolucionarLab ( solucao );
+
+			while (solucao[i][0]!=-1)
+			{
+				printf("(%d,%d)",solucao[i][0],solucao[i][1]);
+				i++;
+			}
+			printf("\n");
 		}
 
 		else if (entrada ==6)

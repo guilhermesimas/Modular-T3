@@ -1,0 +1,46 @@
+// Script:    TesteGrafo.script
+// Autor:     Clara Szwarcman, Guilherme Simas e Lucas Borges
+// Data:      30/09/2014
+// Propósito: Testar o módulo GRAFO.C
+
+==Inicializar valores
+=declararparm OK			int 0
+=declararparm LabirintoNaoExiste	int 1
+=declararparm CaminhoNaoExiste		int 2
+=declararparm ErroArquivo		int 3
+=declararparm Saida			int 4
+=declararparm Memoria			int 5
+
+==Verificar situações relativas a labirinto não existente
+=criar_cam	0	0	l	LabirintoNaoExiste
+=mostra					LabirintoNaoExiste
+=criar_ent	0	0		LabirintoNaoExiste
+=criar_saida	1	1		LabirintoNaoExiste
+=andar		n			LabirintoNaoExiste
+=carregar	teste			LabirintoNaoExiste
+=solucionar				LabirintoNaoExiste
+=salvar		teste			LabirintoNaoExiste
+
+==Criar Labirinto
+=criar		2	2		OK
+
+==Definir entrada e saida
+=criar_ent	0	0		OK
+=criar_saida	1	1		OK
+
+==Operar com labirinto "fechado"
+=andar		l			CaminhoNaoExiste
+=solucionar				CaminhoNaoExiste
+
+==Salvar e carregar o arquivo, vendo se continua o mesmo
+=salvar		tstlab			OK
+=carregar	tstlab			OK
+=andar		l			CaminhoNaoExiste
+=solucionar				CaminhoNaoExiste
+
+==Criar os caminhos até saida
+=criar_cam	0	0	l	OK
+=criar_cam	1	0	n	OK
+
+==Chegar ate saida
+=solucionar				OK

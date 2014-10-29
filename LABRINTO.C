@@ -59,7 +59,7 @@ void LAB_CriarLab (int altura, int largura)
 *  Função: LAB  &Criar Caminho
 *****/
 
-void LAB_CriarCaminho (int x, int y, char direcao)
+int LAB_CriarCaminho (int x, int y, char direcao)
 {
 	int chave1, chave2, i, j;
 
@@ -67,9 +67,16 @@ void LAB_CriarCaminho (int x, int y, char direcao)
 	chave1=ObterChaveCord(i,j);
 	chave2=ObterChaveDir(chave1,direcao);
 
+	if (chave2/100<0 || chave2/100>=LAB_altura ||chave2%100<0 || chave2%100>=LAB_largura)
+	{
+		return -1;
+	}
+
 	GRF_CriaVertice(labirinto,NULL,chave1);
 	GRF_CriaVertice(labirinto,NULL,chave2);
 	GRF_CriaAresta(labirinto,chave1,chave2);
+
+	return 0;
 
 } /* Fim função: LAB  &Criar Caminho */
 
@@ -163,6 +170,8 @@ void LAB_CriarEntrada (int x, int y )
 
 	TransfCord(x,y,&i,&j);
 	LAB_entrada=ObterChaveCord(i,j);
+	GRF_CriaVertice(labirinto,NULL,LAB_entrada);
+
 	GRF_AlteraCorrente(labirinto,LAB_entrada);
 
 } /* Fim função: LAB  &Criar Entrada */
@@ -178,6 +187,7 @@ void LAB_CriarSaida (int x, int y )
 
 	TransfCord(x,y,&i,&j);
 	LAB_saida=ObterChaveCord(i,j);
+	GRF_CriaVertice(labirinto,NULL,LAB_saida);
 
 } /* Fim função: LAB  &Criar Saida */
 

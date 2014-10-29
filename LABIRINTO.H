@@ -39,7 +39,16 @@
 
          LAB_CondRetOK ,
                /* Concluiu corretamente */
-
+		 LAB_CondRetLabirintoNaoExiste,
+			   /* Labirinto não foi criado */
+		 LAB_CondRetNaoExisteCaminho,
+			   /* Nao existe caminho entre as celulas */
+		 LAB_CondRetErroArquivo,
+			   /* Erro ao abrir ou gerar o arquivo */
+		 LAB_CondRetSaida,
+			   /* Corrente se encontra na saída */
+		 LAB_CondRetMemoria
+			   /* Nao ha memoria suficiente para alocar a estrutura */
    } LAB_tpCondRet ;
 
 

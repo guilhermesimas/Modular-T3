@@ -45,13 +45,17 @@ void ObterCoordChave (int chave , int * x, int * y);
 *  Função: LAB  &Criar Labirinto
 *****/
 
-void LAB_CriarLab (int altura, int largura)
+LAB_tpCondRet LAB_CriarLab (int altura, int largura)
 {
 
-	GRF_CriarGrafo(&labirinto,NULL);
+	if(GRF_CriarGrafo(&labirinto,NULL)==GRF_CondRetFaltouMemoria)
+	{
+		return LAB_CondRetMemoria;
+	}
 	LAB_altura=altura;
 	LAB_largura=largura;
 
+	return LAB_CondRetOK;
 } /* Fim função: LAB  &Criar Labirinto */
 
 /***************************************************************************
@@ -59,7 +63,7 @@ void LAB_CriarLab (int altura, int largura)
 *  Função: LAB  &Criar Caminho
 *****/
 
-int LAB_CriarCaminho (int x, int y, char direcao)
+LAB_tpCondRet LAB_CriarCaminho (int x, int y, char direcao)
 {
 	int chave1, chave2, i, j;
 
@@ -69,14 +73,14 @@ int LAB_CriarCaminho (int x, int y, char direcao)
 
 	if (chave2/100<0 || chave2/100>=LAB_altura ||chave2%100<0 || chave2%100>=LAB_largura)
 	{
-		return -1;
+		return LAB_CondRetNaoExisteCaminho;
 	}
 
 	GRF_CriaVertice(labirinto,NULL,chave1);
 	GRF_CriaVertice(labirinto,NULL,chave2);
 	GRF_CriaAresta(labirinto,chave1,chave2);
 
-	return 0;
+	return LAB_CondRetOK;
 
 } /* Fim função: LAB  &Criar Caminho */
 
@@ -85,11 +89,14 @@ int LAB_CriarCaminho (int x, int y, char direcao)
 *  Função: LAB  &Mostrar Labirinto
 *****/
 
-void LAB_MostraLab ( void )
+LAB_tpCondRet LAB_MostraLab ( void )
 {
 	int i, j,chave, posicao;
 
-	GRF_ObterCorr(labirinto,&posicao,NULL);
+	if(GRF_ObterCorr(labirinto,&posicao,NULL)==GRF_CondRetGrafoNaoExiste)
+	{
+		return LAB_CondRetLabirintoNaoExiste;
+	}
 	
 	printf("  ");
 	for (i=0 ; i<2*LAB_largura+1; i++ )
@@ -156,7 +163,7 @@ void LAB_MostraLab ( void )
 			printf(" ");
 	}
 	printf("\n");
-
+	return LAB_CondRetOK;
 } /* Fim função: LAB  &Mostrar Labirinto */
 
 /***************************************************************************
@@ -164,15 +171,20 @@ void LAB_MostraLab ( void )
 *  Função: LAB  &Criar Entrada
 *****/
 
-void LAB_CriarEntrada (int x, int y )
+LAB_tpCondRet LAB_CriarEntrada (int x, int y )
 {
 	int i, j;
 
 	TransfCord(x,y,&i,&j);
 	LAB_entrada=ObterChaveCord(i,j);
-	GRF_CriaVertice(labirinto,NULL,LAB_entrada);
+	if(GRF_CriaVertice(labirinto,NULL,LAB_entrada)==GRF_CondRetGrafoNaoExiste)
+	{
+		return LAB_CondRetLabirintoNaoExiste ;
+	}
 
 	GRF_AlteraCorrente(labirinto,LAB_entrada);
+
+	return LAB_CondRetOK;
 
 } /* Fim função: LAB  &Criar Entrada */
 
@@ -181,13 +193,18 @@ void LAB_CriarEntrada (int x, int y )
 *  Função: LAB  &Criar Saida
 *****/
 
-void LAB_CriarSaida (int x, int y )
+LAB_tpCondRet LAB_CriarSaida (int x, int y )
 {
 	int i, j;
 
 	TransfCord(x,y,&i,&j);
 	LAB_saida=ObterChaveCord(i,j);
-	GRF_CriaVertice(labirinto,NULL,LAB_saida);
+	if(GRF_CriaVertice(labirinto,NULL,LAB_saida)==GRF_CondRetGrafoNaoExiste)
+	{
+		return LAB_CondRetLabirintoNaoExiste ;
+	}
+
+	return LAB_CondRetOK;
 
 } /* Fim função: LAB  &Criar Saida */
 
@@ -200,18 +217,25 @@ int LAB_Andar (char direcao )
 {
 	int chave_prox, chave,ret;
 
-	GRF_ObterCorr(labirinto,&chave,NULL);
+	if(GRF_ObterCorr(labirinto,&chave,NULL)==GRF_CondRetGrafoNaoExiste)
+	{
+		return LAB_CondRetLabirintoNaoExiste;
+	}
 	chave_prox=ObterChaveDir(chave, direcao);
 
 	ret=GRF_IrVizinho(labirinto, chave_prox);
 
-
+	if(ret==GRF_CondRetVerticesDesconexos)
+	{
+		return LAB_CondRetNaoExisteCaminho ;
+	}
+	
 	if (ret==GRF_CondRetOK && chave_prox==LAB_saida)
 	{
-		return 1;
+		return LAB_CondRetSaida;
 	}
 
-	return 0;
+	return LAB_CondRetOK;
 
 } /* Fim função: LAB  &Andar */
 
@@ -220,18 +244,23 @@ int LAB_Andar (char direcao )
 *  Função: LAB  &Salvar Labirinto
 *****/
 
-void LAB_Salvar ( char * nome_saida )
+LAB_tpCondRet LAB_Salvar ( char * nome_saida )
 {
 	int i , j ;
 	int chave_vertice ;
 	FILE * arq_saida ;
 
+	if(labirinto==NULL)
+	{
+		return LAB_CondRetLabirintoNaoExiste;
+	}
+	
 	arq_saida = fopen ( nome_saida , "w" ) ;
 
 	if ( arq_saida == NULL )
 	{
 		printf(" Erro ao criar arquivo. ") ;
-		return ;
+		return LAB_CondRetErroArquivo;
 	}
 
 	fprintf ( arq_saida , "%d %d %d %d\n" , LAB_largura , LAB_altura , LAB_entrada , LAB_saida ) ;
@@ -259,7 +288,7 @@ void LAB_Salvar ( char * nome_saida )
 
 	fclose ( arq_saida ) ;
 
-	return;
+	return LAB_CondRetOK ;
 
 } /* Fim função: LAB  &Salvar Labirinto */
 
@@ -268,18 +297,23 @@ void LAB_Salvar ( char * nome_saida )
 *  Função: LAB  &Carregar Labirinto
 *****/
 
-void LAB_Carregar ( char * nome_entrada )
+LAB_tpCondRet LAB_Carregar ( char * nome_entrada )
 {
 	int chave_vertice;
 	char direcao ;
 	FILE * arq_entrada ;
+
+	if(labirinto==NULL)
+	{
+		return LAB_CondRetLabirintoNaoExiste;
+	}
 
 	arq_entrada = fopen ( nome_entrada , "r" ) ;
 
 	if ( arq_entrada == NULL )
 	{
 		printf( "Erro ao abrir o arquivo" );
-		return ;
+		return LAB_CondRetErroArquivo;
 	}/* if */
 	fscanf (arq_entrada,"%d %d %d %d", &LAB_largura , &LAB_altura , &LAB_entrada , &LAB_saida );
 	LAB_CriarLab ( LAB_altura , LAB_largura );
@@ -293,7 +327,7 @@ void LAB_Carregar ( char * nome_entrada )
 	GRF_AlteraCorrente(labirinto,LAB_entrada); /*  precisa por corrente na entrada */
 
 
-	return;
+	return LAB_CondRetOK;
 
 } /* Fim função: LAB  &Carregar Labirinto */
 
@@ -317,18 +351,13 @@ void LAB_DestruirLab ( void )
 *  Função: LAB  &Solucionar Labirinto
 *****/
 
-void LAB_SolucionarLab ( int ** buffer_solucao )
+LAB_tpCondRet LAB_SolucionarLab ( int ** buffer_solucao )
 {
 	int chaveAtual , * aux , i , *temp , x , y ;
 
-	if (labirinto == NULL)
+	if(GRF_ObterCorr (labirinto,&chaveAtual,NULL) == GRF_CondRetGrafoNaoExiste )
 	{
-		exit(1);
-	}
-
-	if(GRF_ObterCorr (labirinto,&chaveAtual,NULL) != GRF_CondRetOK )
-	{
-
+		return LAB_CondRetLabirintoNaoExiste;
 	}
 
 	aux = (int *) malloc (LAB_altura * LAB_largura * ( sizeof ( int ) ) ) ;	
@@ -355,7 +384,7 @@ void LAB_SolucionarLab ( int ** buffer_solucao )
 	buffer_solucao[i][0] = -1 ;
 	buffer_solucao[i][1] = -1 ;
 
-	return;
+	return LAB_CondRetOK;
 } /* Fim função: LAB  &Solucionar Labirinto */
 
 /*****  Código das funções encapsuladas no módulo  *****/

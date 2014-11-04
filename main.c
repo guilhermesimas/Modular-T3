@@ -413,7 +413,15 @@ void CriarLab ( void )
 				scanf(" %30[^\n]",arq);
 				strcat(arq,".lab");
 
-				LAB_Salvar(arq);
+				if(LAB_Salvar(arq)==LAB_CondRetOK)
+				{
+					printf("\nLabirinto salvo com sucesso\n\n");
+				} 
+				else
+				{
+					printf("Erro ao salvar arquivo\n\n");
+				} /* if */
+				system("pause");
 				//LAB_DestruirLab();
 				//return; 
 			//} /* if */

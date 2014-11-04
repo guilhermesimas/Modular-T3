@@ -134,6 +134,7 @@ void InicializaLAB (void ){
 void JogarLab ( void )
 {
 	int entrada;
+	system("cls");
 	LAB_MostraLab();
 
 	printf("\n\n1 - Mover-se para Sul\n"
@@ -178,13 +179,14 @@ void JogarLab ( void )
 				} /* while */
 				printf("\n\n");
 				system("pause");
+				free(solucao);
 			}
 			else if (ret == LAB_CondRetNaoExisteCaminho)
 			{
 				printf("Labirinto impossivel, nao existe caminho ate a saida!!\n\n");
 				system("pause");
 			}
-			else
+			/*else
 			{
 				printf("O retorno foi: %d",ret);
 				system("pause");
@@ -322,13 +324,14 @@ void CriarLab ( void )
 
 	printf("\nComandos:\n"
 			"1 - Selecionar celula para criar caminho\n"
-			"2 - Salvar e sair\n"
-			"3 - Sair sem salvar\n"
+			"2 - Salvar\n"
+			"3 - Jogar!\n"
+			"4 - Sair sem salvar\n"
 			"\nEscolha uma das opcoes: ");
 	scanf("%d", &entrada);
 	limpa_stdin();
 
-	while (entrada<1 || entrada >3)
+	while (entrada<1 || entrada >4)
 	{
 		entrada=ReobterEntrada();
 	} /* while */
@@ -359,7 +362,24 @@ void CriarLab ( void )
 				if (LAB_CriarCaminho(x,y,ConvDir(entrada))== LAB_CondRetForaLab)
 				{
 					printf("Nao e possivel criar um caminho para fora do labirinto!!\n\n");
+				} 
+				else if (entrada == 1)
+				{
+					printf("Caminho ao Sul criado com sucesso.\n\n");
+				}
+				else if (entrada == 2)
+				{
+					printf("Caminho ao Norte criado com sucesso.\n\n");
+				}
+				else if (entrada == 3)
+				{
+					printf("Caminho ao Oeste criado com sucesso.\n\n");
+				}
+				else if (entrada == 4)
+				{
+					printf("Caminho ao Leste criado com sucesso.\n\n");
 				} /* if */
+
 				printf("Escolha uma das opcoes: ");
 				scanf("%d",&entrada);
 				limpa_stdin();
@@ -374,7 +394,7 @@ void CriarLab ( void )
 		
 			int resp;
 			
-			printf("\nTem certeza que quer salvar e voltar ao menu principal?\n"
+		/*	printf("\nTem certeza que quer salvar e voltar ao menu principal?\n"
 					"Nao podera voltar a editar o labirinto.\n"
 					"1 - SIM\n"
 					"2 - NAO\n");
@@ -386,24 +406,29 @@ void CriarLab ( void )
 				resp=ReobterEntrada();
 			} /* while */
 
-			if (resp == 1 )
-			{
+			/*if (resp == 1 )
+			{*/
 				char arq[35];
 				printf("\nQual o nome do arquivo? (maximo de 30 caracteres)\n");
 				scanf(" %30[^\n]",arq);
 				strcat(arq,".lab");
 
 				LAB_Salvar(arq);
-				LAB_DestruirLab();
-				return; 
-			} /* if */
+				//LAB_DestruirLab();
+				//return; 
+			//} /* if */
 		}
 		else if (entrada == 3)
+		{
+			JogarLab();
+			return;
+		}
+		else if (entrada == 4)
 		{
 			int resp;
 			
 			printf("\nTem certeza que quer sair e voltar ao menu principal?\n"
-					"Perdera o labirinto criado.\n"
+					"Perdera o progresso nao salvo do labirinto criado.\n"
 					"1 - SIM\n"
 					"2 - NAO\n");
 			scanf("%d", &resp);
@@ -428,13 +453,14 @@ void CriarLab ( void )
 
 		printf("\nComandos:\n"
 			"1 - Selecionar celula para criar caminho\n"
-			"2 - Sair e salvar\n"
-			"3 - Sair sem salvar\n"
+			"2 - Salvar\n"
+			"3 - Jogar!\n"
+			"4 - Sair sem salvar\n"
 			"\nEscolha uma das opcoes: ");
 		scanf("%d", &entrada);
 		limpa_stdin();
 
-		while (entrada<1 || entrada >3)
+		while (entrada<1 || entrada >4)
 		{
 			entrada=ReobterEntrada();
 		} /* while */

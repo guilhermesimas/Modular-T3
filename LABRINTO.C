@@ -187,7 +187,7 @@ LAB_tpCondRet LAB_CriarEntrada (int x, int y )
 	{
 		return LAB_CondRetLabirintoNaoExiste ;
 	} /* if */
-	printf("VAI ALTERAR CORR PRA ENT\n\n");
+	
 	GRF_AlteraCorrente(labirinto,LAB_entrada);
 
 	return LAB_CondRetOK;

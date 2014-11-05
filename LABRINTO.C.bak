@@ -67,11 +67,6 @@ LAB_tpCondRet LAB_CriarCaminho (int x, int y, char direcao)
 {
 	int chave1, chave2, i, j;
 
-	if(labirinto==NULL)
-	{
-		return LAB_CondRetLabirintoNaoExiste;
-	}/* if */
-
 	TransfCord(x, y, &i, &j);	
 	chave1=ObterChaveCord(i,j);
 	chave2=ObterChaveDir(chave1,direcao);
@@ -242,7 +237,7 @@ LAB_tpCondRet LAB_Andar (char direcao )
 	ret=GRF_IrVizinho(labirinto, chave_prox);
 
 	/* nao existe caminho */
-	if(ret==GRF_CondRetVerticesDesconexos || ret==GRF_CondRetVerticeNaoExiste)
+	if(ret==GRF_CondRetVerticesDesconexos)
 	{
 		return LAB_CondRetNaoExisteCaminho ;
 	} /* if */
@@ -386,36 +381,27 @@ LAB_tpCondRet LAB_SolucionarLab ( int *** buffer_solucao )
 	{
 		return LAB_CondRetNaoExisteCaminho;
 	} /* if */
-	if(buffer_solucao!=NULL)
+	(*buffer_solucao) = ( int ** )malloc ( (LAB_largura * LAB_altura + 1) * sizeof ( int * ) ) ;
+	temp = ( int * )malloc ( (LAB_largura * LAB_altura + 1) * 2 * sizeof ( int ) ) ;
+	if(buffer_solucao==NULL || temp==NULL)
 	{
-		(*buffer_solucao) = ( int ** )malloc ( (LAB_largura * LAB_altura + 1) * sizeof ( int * ) ) ;
-		temp = ( int * )malloc ( (LAB_largura * LAB_altura + 1) * 2 * sizeof ( int ) ) ;
-		if((*buffer_solucao)==NULL || temp==NULL)
-		{
-			return LAB_CondRetMemoria;
-		} /* if */
-	
-		for (i = 0; i < LAB_largura * LAB_altura+1; i++) 
-		{
-			(*buffer_solucao)[i] = temp + (i * 2);
-		} /* for */
+		return LAB_CondRetMemoria;
+	} /* if */
 
-		free(temp);
+	for (i = 0; i < LAB_largura * LAB_altura+1; i++) 
+	{
+		(*buffer_solucao)[i] = temp + (i * 2);
+	} /* for */
 
-		for( i=0 ; aux[i]!=-1 ; i++ )
-		{
-			ObterCoordChave ( aux[i] , &x , &y ) ;
-			(*buffer_solucao)[i][0] = x ;
-			(*buffer_solucao)[i][1] = y ;
-		} /* for */
+	for( i=0 ; aux[i]!=-1 ; i++ )
+	{
+		ObterCoordChave ( aux[i] , &x , &y ) ;
+		(*buffer_solucao)[i][0] = x ;
+		(*buffer_solucao)[i][1] = y ;
+	} /* for */
 
-		(*buffer_solucao)[i][0] = -1 ;
-		(*buffer_solucao)[i][1] = -1 ;
-
-	}/* if */
-
-	free(aux);
-	
+	(*buffer_solucao)[i][0] = -1 ;
+	(*buffer_solucao)[i][1] = -1 ;
 
 	return LAB_CondRetOK;
 } /* Fim função: LAB  &Solucionar Labirinto */

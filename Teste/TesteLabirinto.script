@@ -1,0 +1,62 @@
+// Script:    TesteLabirinto.script
+// Autor:     Clara Szwarcman, Guilherme Simas e Lucas Borges
+// Data:      05/11/2014
+// Propósito: Testar o módulo LABIRINTO.C
+
+==Inicializar valores
+=declararparm OK			int 0
+=declararparm LabirintoNaoExiste	int 1
+=declararparm CaminhoNaoExiste		int 2
+=declararparm ErroArquivo		int 3
+=declararparm Saida			int 4
+=declararparm ForaLabirinto		int 5
+=declararparm Memoria			int 6
+=declararparm CaminhoJaExiste		int 7
+
+==Verificar situações relativas a labirinto não existente
+=criar_cam	1	1	'l'	LabirintoNaoExiste
+=mostra					LabirintoNaoExiste
+=criar_ent	1	1		LabirintoNaoExiste
+=criar_saida	2	2		LabirintoNaoExiste
+=andar		'n'			LabirintoNaoExiste
+=solucionar				LabirintoNaoExiste
+=salvar		"teste"			LabirintoNaoExiste
+
+==Criar Labirinto
+=criar		2	2		OK
+
+==Definir entrada e saida
+=criar_ent	1	1		OK
+=criar_saida	2	2		OK
+
+==Operar com labirinto "fechado"
+=andar		'l'			CaminhoNaoExiste
+=solucionar				CaminhoNaoExiste
+
+==Salvar e carregar o arquivo, vendo se continua o mesmo
+=mostra					OK
+=salvar		"tstlab"		OK
+=destruir
+=mostra					LabirintoNaoExiste
+=carregar	"tstlab"		OK
+=mostra					OK
+=andar		'l'			CaminhoNaoExiste
+=solucionar				CaminhoNaoExiste
+
+==Criar os caminhos até saida
+=criar_cam	1	1	'o'	ForaLabirinto
+=criar_cam	1	1	'l'	OK
+=criar_cam	2	1	'n'	OK
+=criar_cam	1	1	'l' 	CaminhoJaExiste
+=mostra					OK
+
+==Chegar ate saida
+=solucionar				OK
+=andar		'l'			OK
+=andar		'n'			Saida
+
+==Destruir o labirinto
+
+=destruir
+=mostra					LabirintoNaoExiste
+

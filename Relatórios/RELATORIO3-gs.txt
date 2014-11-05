@@ -1,0 +1,16 @@
+Relatório:
+
+Data	HorasTrabalhadas	Descrição			Detalhamento
+
+11/10		1		projetar			projetando as funções de carregar e salvar o labirinto
+11/10		2		codificar modulo		implementando as funções de carregar e salvar o labirinto
+11/10		0.5		diagnosticar e corrigir		corrigindo bugs das funções implementadas 
+28/10		1		projetar			projetar a função de solucionar o labirinto
+28/10           2		codificar modulo		implementar a função de solucionar o labirinto
+28/10		2		diagnosticar e corrigir		corrigindo bugs da função de solucionar labirinto
+28/10		1.5		codificar modulo		codificar modulo TSTLAB
+01/11		1		redigir script de teste		escrever o script de teste do labirinto
+01/11		0.2		realizar testes			executar o script de teste do labirinto
+01/11		1		diagnosticar e corrigir		resolver os erros encontrados no script
+01/11		0.5		codificar modulo		implementar as soluções encontradas no modulo labirinto para as falhas encontradas nos testes
+01/11		0.2		realizar testes			executar o script após a mudança, confirmando os reparos

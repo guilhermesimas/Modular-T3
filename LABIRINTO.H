@@ -70,8 +70,13 @@
 *		LAB_CondRetMemoria - faltou memória ao alocar espaço
 *
 *  $AE Assertivas de entrada
+*		- labirinto não existe
+*		- altura é um valor válido (inteiro positivo e menor que 39)
+*		- largura é um valor válido (inteiro positivo e menot que 39)
 *
 *  $AS Assertivas de saída
+*		- labirinto foi criado
+*		- valem as assertivas estruturais do grafo
 *
 ***********************************************************************/
 
@@ -93,10 +98,19 @@
 *		LAB_CondRetOK - criou caminho sem problemas
 *		LAB_CondRetForaLab - caminho para a direcao desejada 
 *							esta fora dos limites do labirinto
+*		LAB_CondRetCaminhoJaExiste - caminho para a direcao desejada
+*									 ja existia
 *
 *  $AE Assertivas de entrada
+*		- Valem as assertivas estruturais do grafo
+*		- x é um valor de coordenada válido (inteiro positivo e menor que largura)
+*		- y é um valor de coordenada válido (inteiro positivo e menor que altura)
+*		- direcao é um valor válido (caracter = 'n' ou 's' ou 'l' ou 'o')
 *
 *  $AS Assertivas de saída
+*		- Valem as assertivas estruturais do grafo
+*		- Se o caminho da celula para a direcao 
+*			desejada nao existia, ele foi criado
 *
 ***********************************************************************/
 
@@ -116,8 +130,11 @@
 *		LAB_CondRetLabirintoNaoExiste - não existe labirinto
 *
 *  $AE Assertivas de entrada
+*		- Valem as assertivas estruturais do grafo
 *
 *  $AS Assertivas de saída
+*		- Valem as assertivas estruturais do grafo
+*		- Se o labirinto existe, ele é mostrado na tela
 *
 ***********************************************************************/
 
@@ -139,8 +156,13 @@
 *		LAB_CondRetLabirintoNaoExiste - não existe labirinto
 *
 *  $AE Assertivas de entrada
+*		- Valem as assertivas estruturais do grafo
+*		- x é um valor de coordenada válido
+*		- y é um valor de coordenada válido
 *
 *  $AS Assertivas de saída
+*		- Valem as assertivas estruturais do grafo
+*		- Se o labirinto existe, a entrada foi criada
 *
 ***********************************************************************/
 
@@ -162,8 +184,13 @@
 *		LAB_CondRetLabirintoNaoExiste - não existe labirinto
 *
 *  $AE Assertivas de entrada
+*		- Valem as assertivas estruturais do grafo
+*		- x é um valor de coordenada válido
+*		- y é um valor de coordenada válido
 *
 *  $AS Assertivas de saída
+*		- Valem as assertivas estruturais do grafo
+*		- Se o labirinto existe, a saida foi criada
 *
 ***********************************************************************/
 
@@ -186,8 +213,13 @@
 *		LAB_CondRetSaida - célula na direção desejada é a saida do labirinto
 *
 *  $AE Assertivas de entrada
+*		- Valem as assertivas estruturais do grafo
+*		- direcao é um valor válido
 *
 *  $AS Assertivas de saída
+*		- Valem as assertivas estruturais do grafo
+*		- Se o labirinto existe e existe caminho para a direcao desejada,
+*		  a posicao no labirinto é alterada
 *
 ***********************************************************************/
 
@@ -209,8 +241,12 @@
 *		LAB_CondRetErroArquivo - não foi possivel abrir o arquivo
 *
 *  $AE Assertivas de entrada
+*		- Valem as assertivas estruturais do grafo
 *
 *  $AS Assertivas de saída
+*		- Valem as assertivas estruturais do grafo
+*		- Se foi possivel abrir o arquivo, o labirinto foi carregado
+*		  (sua entrada, saida, vertices e caminhos foram criados)
 *
 ***********************************************************************/
 
@@ -234,8 +270,13 @@
 *		LAB_CondRetMemoria - faltou memória ao alocar espaço
 *
 *  $AE Assertivas de entrada
+*		- Valem as assertivas estruturais do grafo
+*		- buffer_solucao é um ponteiro valido
 *
 *  $AS Assertivas de saída
+*		- Valem as assertivas estruturais do grafo
+*		- Se o labirinto existe e a solucao é possivel o caminho ate a saida 
+*		  é alocado no buffer_solucao
 *
 ***********************************************************************/
 
@@ -257,8 +298,12 @@
 *		LAB_CondRetErroArquivo - não foi possivel abrir o arquivo
 *
 *  $AE Assertivas de entrada
+*		- Valem as assertivas estruturais do grafo
 *
 *  $AS Assertivas de saída
+*		- Valem as assertivas estruturais do grafo
+*		- Se o labirinto existe e foi possivel abrir o arquivo
+*		  o labirinto foi salvo em um arquivo com o nome_saida
 *
 ***********************************************************************/
 
@@ -276,8 +321,10 @@
 *  $FV Valor retornado
 *
 *  $AE Assertivas de entrada
+*		- Valem as assertivas estruturais do grafo
 *
 *  $AS Assertivas de saída
+*		- Se o labirinto existia ele foi destruido
 *
 ***********************************************************************/
 	

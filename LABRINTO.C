@@ -76,6 +76,10 @@ LAB_tpCondRet LAB_CriarCaminho (int x, int y, char direcao)
 		return LAB_CondRetForaLab;
 	} /* if */
 
+	if(GRF_ExisteVertice ( labirinto , chave1 )== GRF_CondRetVerticeJaExiste && GRF_ExisteVertice ( labirinto , chave2 ) ==
+		GRF_CondRetVerticeJaExiste && GRF_ExisteAresta ( labirinto, chave1, chave2 ) == GRF_CondRetArestaJaExiste)
+		return LAB_CondRetCaminhoJaExiste;
+
 	GRF_CriaVertice(labirinto,NULL,chave1);
 	GRF_CriaVertice(labirinto,NULL,chave2);
 	GRF_CriaAresta(labirinto,chave1,chave2);

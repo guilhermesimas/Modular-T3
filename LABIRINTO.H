@@ -46,8 +46,10 @@
 			   /* Corrente se encontra na saída */
 		 LAB_CondRetForaLab,
 			   /* Caminho vai para fora da área do labirinto */
-		 LAB_CondRetMemoria
+		 LAB_CondRetMemoria,
 			   /* Nao ha memoria suficiente para alocar a estrutura */
+		 LAB_CondRetCaminhoJaExiste
+			  /* Ja existe caminho entre as celulas do Labirinto*/
    } LAB_tpCondRet ;
 
 

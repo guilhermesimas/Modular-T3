@@ -280,6 +280,7 @@ int ReobterEntrada ( void )
 void CriarLab ( void )
 {
 	int altura, largura, x,y, entrada;
+	LAB_tpCondRet lab_ret; 
 	LAB_DestruirLab();
 	printf("Criando Labirinto...\n\n");
 	Titulo();
@@ -359,10 +360,16 @@ void CriarLab ( void )
 			} /* while */
 			while (entrada !=5)
 			{
-				if (LAB_CriarCaminho(x,y,ConvDir(entrada))== LAB_CondRetForaLab)
+				lab_ret = LAB_CriarCaminho(x,y,ConvDir(entrada));
+
+				if (lab_ret == LAB_CondRetForaLab)
 				{
 					printf("Nao e possivel criar um caminho para fora do labirinto!!\n\n");
-				} 
+				}
+				else if (lab_ret == LAB_CondRetCaminhoJaExiste)
+				{
+					printf("Caminho ja existe!\n\n");
+				}
 				else if (entrada == 1)
 				{
 					printf("Caminho ao Sul criado com sucesso.\n\n");

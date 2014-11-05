@@ -95,6 +95,7 @@
 *		direcao - direcao para a qual se quer criar o caminho
 *
 *  $FV Valor retornado
+*		LAB_CondRetLabirintoNaoExiste - não existe labirinto
 *		LAB_CondRetOK - criou caminho sem problemas
 *		LAB_CondRetForaLab - caminho para a direcao desejada 
 *							esta fora dos limites do labirinto
@@ -126,6 +127,7 @@
 *  $EP Parâmetros
 *		
 *  $FV Valor retornado
+*		LAB_CondRetLabirintoNaoExiste - não existe labirinto
 *		LAB_CondRetOK - mostrou labirinto sem problemas
 *		LAB_CondRetLabirintoNaoExiste - não existe labirinto
 *
@@ -276,7 +278,7 @@
 *  $AS Assertivas de saída
 *		- Valem as assertivas estruturais do grafo
 *		- Se o labirinto existe e a solucao é possivel o caminho ate a saida 
-*		  é alocado no buffer_solucao
+*		  é alocado no buffer_solucao caso este tenha sido fornecido
 *
 ***********************************************************************/
 
@@ -294,6 +296,7 @@
 *					 se deseja salvar o labirinto
 *
 *  $FV Valor retornado
+*		LAB_LabirintoNaoExiste - não existe labirinto
 *		LAB_CondRetOK - salvou labirinto sem problemas
 *		LAB_CondRetErroArquivo - não foi possivel abrir o arquivo
 *

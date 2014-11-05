@@ -13,5 +13,4 @@ Data	HorasTrabalhadas	Descrição			Detalhamento
 01/11		0.2		realizar testes			executar o script de teste do labirinto
 01/11		1		diagnosticar e corrigir		resolver os erros encontrados no script
 01/11		0.5		codificar modulo		implementar as soluções encontradas no modulo labirinto para as falhas encontradas nos testes
-01/11		0.2		realizar testes			executar o script após a mudança, confirmando os reparos
-05/11		1		
+01/11		0.2		realizar testes			executar o script após a mudança, confirmando os reparos		

@@ -1,0 +1,67 @@
+// Script:    ScriptTesteManual
+// Autor:     Clara Szwarcman, Guilherme Simas e Lucas Borges
+// Data:      05/11/2014
+// Propósito: Testar a aplicação Labirinto
+
+==Criando um Labirinto
+-Digite '1', enter. A aplicação lhe perguntará "Quantas celulas de altura deve ter o labirinto? <Maximo de 38>".
+-Digite '4', enter. A aplicação lhe perguntará "Quanats celulas de largura deve ter o labirinto? <Maximo de 38>".
+-Digite '3', enter. A aplicação imprimirá a estrutura do labirinto e lhe perguntará "Qual a posicao da entrada? <x,y>".
+-Digite '1,1', enter. A aplicação lhe perguntara "Qual a posicao da saida? <x,y>".
+-Digite '3,3', enter. A estrutura do labirinto impressa conterá um símbolo de + nas casas 1,1 e 3,3 e oferecerá comandos que podem ser executados então.
+-Digite '1', enter. A aplicação lhe perguntará "Qual a celula? <x,y>".
+-Digite '1,1', enter. A aplicação lhe pede que "Selecione uma direcao para o caminho:".
+-Digite '4', enter. A aplicaçao informara que "Caminho ao Leste criado com sucesso" e pedirá que "Escolha uma das opcoes".
+-Digite '5', enter. A estrutura do labirinto impressa apresentará uma parede a menos e lhe pedira novamente que "Escolha uma das opcoes:"
+-Digite '1', enter. A aplicação lhe perguntara "Qual a celula? <x,y>"
+-Digite '2,2', enter. A aplicação lhe pede que "Selecione uma direcao para o caminho:".
+-Digite '1', enter. A aplicaçao informara que "Caminho ao Sul criado com sucesso" e pedirá que "Escolha uma das opcoes".
+-Digite '2', enter. A aplicaçao informara que "Caminho ao Norte criado com sucesso" e pedirá que "Escolha uma das opcoes".
+-Digite '5', enter. A estrutura do labirinto impressa apresentará paredes a menos e lhe pedira novamente que "Escolha uma das opcoes:"
+-Digite '1', enter. A aplicação lhe perguntará "Qual a celula? <x,y>".
+-Digite '3,2', enter. A aplicação lhe pede que "Selecione uma direcao para o caminho:".
+-Digite '2', enter. A aplicaçao informara que "Caminho ao Norte criado com sucesso" e pedirá que "Escolha uma das opcoes".
+-Digite '3', enter. A aplicaçao informara que "Caminho ao Oeste criado com sucesso" e pedirá que "Escolha uma das opcoes".
+-Digite '5', enter. A estrutura do labirinto impressa apresentará paredes a menos e lhe pedira novamente que "Escolha uma das opcoes:".
+6:37 PM 11/5/2014
+==Salvando o labirinto
+-Digite '2', enter. A aplicaçao lhe perguntara "Qual o nome do arquivo? <maximo de 30 caracteres>".
+-Digite 'scriptManual', enter. A aplicação lhe informará que o labirinto foi salvo com sucesso.
+-enter. A aplicação oferecerá comandos que podem ser executados então.
+
+==Jogando o labirinto
+-Digite '3', enter. A aplicação lhe perguntará  se "Tem certeza que quer jogar?" e avisará que "Perdera o progresso nao salvo do labirinto criado.".
+-Digite '1', enter. Será impresso na tela a estrutura do labirinto e opções.
+-Digite '4', enter. O labirinto impresso será atualizado contendo um '+' na casa 2,1 
+-Digite '2', enter. O labirinto impresso será atualizado contendo um '+' na casa 2,2
+-Digite '4', enter. O labirinto impresso será atualizado contendo um '+' na casa 3,2
+-Digite '2', enter. A aplicação imprimirá uma mensagem parabenizando o usuário.
+
+==Carregando o labirinto
+-enter. A aplicação oferecerá comandos que podem ser executados então.
+-Digite '2', enter. A aplicação lhe perguntará "Qual o nome do arquivo? <maximo de 30 caracteres>".
+-Digite 'scriptManual', enter. Será impresso na tela a estrutura do labirinto e opções.
+-Digite '1', enter. Tudo permanecerá inalterado.
+-Digite '5', enter. A aplicação lhe informará que "O caminho ate a saida e: <2,1> <2,2> <3,2> <3,3>"
+-enter. Será impresso na tela a estrutura do labirinto e opções.
+-Digite '6', enter. A aplicação perguntará se "Tem certeza que quer voltar ao menu principal?" e avisa que "O progresso de seu jogo sera perdido.".
+-Digite '1', enter. A aplicação oferecerá comandos que podem ser executados então
+
+==Fechando a aplicação
+-Digite '4', enter. A aplicação será encerrada.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

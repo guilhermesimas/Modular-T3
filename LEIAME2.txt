@@ -1,0 +1,56 @@
+Leiame - TRAB3-1 : Labirinto
+
+Objetivo:
+
+	Utilizar uma aplicação labirinto. Será possível carregar, salvar, 
+	e jogar labirintos criados e um pré existente. O labirinto utiliza células com
+	coordenadas cartesianas iniciadas em 1.
+
+
+Forma de Execução:
+
+	Renomear o arquivo TRAB3.EXE.txt para TRAB3.EXE
+
+	Dar dois cliques no arquivo TRAB3.EXE
+
+	A aplicação aparecerá na tela e estará disponível para uso. Recomenda-se aumentar o tamanho da janela.
+	
+1) Menu Principal
+
+	No menu existem 4 opções.
+	Para selecionar uma, digite o número correspondente e aperte enter.
+	Um labirinto pré-existente é fornecido como demonstração.
+
+2) Criando um labirinto
+
+	Informe a altura, largura, entrada e saída do labirinto, 
+	apertando enter para enviar.
+	
+	Para criar um caminho entre duas células, 
+	selecione uma célula e escolha a opção referente à direção 
+	pretendida a partir da célula selecionada.
+
+	É possível salvar o labirinto criado, fornecendo seu nome.
+	Se já houver um labirinto com o mesmo nome ele será substituído.
+	
+	É possível jogar diretamente o labirinto criado. 
+	O progresso da criação que não tiver sido salvo será perdido.
+
+	Não é possível realizar mais alterações no labirinto quando sair da criação.
+
+3) Carregando um labirinto
+
+	É possível jogar um labirinto que tenha sido criado e salvo, fornecendo seu nome.
+
+4) Jogando
+
+	Selecione a opção referente a direção que se deseja andar.
+	É possível ver o caminho da sua posição até a saída selecionando a opção correspondente.
+	Será exibido todas as células pelas quais é preciso passar.
+	Se a saída é atingida, o programa volta para o menu principal.
+	Não é possível salvar seu progresso na solução do labirinto.
+
+5) Salvando um labirinto 
+	
+	É possível salvar um labirinto criado fornecendo um nome que será atribuido a ele.
+	

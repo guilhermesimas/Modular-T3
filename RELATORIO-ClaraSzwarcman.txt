@@ -1,0 +1,10 @@
+
+
+Data	HorasTrabalhadas	       Descrição				Detalhamento
+28/10		2		    codificar módulo				implementar funções do modulo labirinto
+28/10		0.5	diagnosticar e corrigir os problemas encontrados	corrigir os erros encontrados nos testes
+28/10		1.0		    revisar projeto				fazer argumentação de corretude
+31/10		2		     revisar módulo				documentação do módulo labirinto.h
+05/11		1		 revisar código do módulo			mudanças em funções no labirinto.c e main.c
+05/11		1		     revisar módulo			        assertivas do módulo labirinto.h
+05/11		1		     realizar testes				realizar testes finais

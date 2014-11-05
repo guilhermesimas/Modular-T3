@@ -279,7 +279,7 @@ int ReobterEntrada ( void )
 
 void CriarLab ( void )
 {
-	int altura, largura, x,y, entrada;
+	int altura, largura, x,y,x2,y2, entrada;
 	LAB_tpCondRet lab_ret; 
 	LAB_DestruirLab();
 	printf("Criando Labirinto...\n\n");
@@ -316,8 +316,13 @@ void CriarLab ( void )
 	LAB_CriarEntrada(x,y);
 
 	printf("\nQual a posicao da saida? (x,y)\n");
-	ObtemPosicaoValida(altura,largura,&x,&y);
-	LAB_CriarSaida(x,y);
+	ObtemPosicaoValida(altura,largura,&x2,&y2);
+	while (x==x2 && y==y2) 
+	{
+		printf("\nJa e a entrada. Qual a posicao da saida? (x,y)\n");
+		ObtemPosicaoValida(altura,largura,&x2,&y2);
+	}
+	LAB_CriarSaida(x2,y2);
 
 	system("cls");
 	printf("Criando Labirinto...\n\n");
@@ -327,7 +332,7 @@ void CriarLab ( void )
 			"1 - Selecionar celula para criar caminho\n"
 			"2 - Salvar\n"
 			"3 - Jogar!\n"
-			"4 - Sair sem salvar\n"
+			"4 - Voltar ao menu principal\n"
 			"\nEscolha uma das opcoes: ");
 	scanf("%d", &entrada);
 	limpa_stdin();
@@ -435,8 +440,26 @@ void CriarLab ( void )
 		}
 		else if (entrada == 3)
 		{
-			JogarLab();
-			return;
+			int resp;
+			
+			printf("\nTem certeza que quer jogar?\n"
+					"Perdera o progresso nao salvo do labirinto criado.\n"
+					"1 - SIM\n"
+					"2 - NAO\n");
+			scanf("%d", &resp);
+			limpa_stdin();
+
+			while (resp !=1 && resp!=2)
+			{
+				resp=ReobterEntrada();
+			} /* while */
+
+			if (resp == 1 )
+			{
+				JogarLab(); 
+				return;
+			} /* if */
+			
 		}
 		else if (entrada == 4)
 		{
@@ -470,7 +493,7 @@ void CriarLab ( void )
 			"1 - Selecionar celula para criar caminho\n"
 			"2 - Salvar\n"
 			"3 - Jogar!\n"
-			"4 - Sair sem salvar\n"
+			"4 - Voltar ao menu principal\n"
 			"\nEscolha uma das opcoes: ");
 		scanf("%d", &entrada);
 		limpa_stdin();

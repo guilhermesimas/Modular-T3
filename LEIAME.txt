@@ -1,0 +1,17 @@
+Leiame - TRAB3-2 : Teste Labirinto
+
+Objetivo: 
+
+	 Realizar testes automatizados em um módulo que implementa um labirinto. 
+	 É possível tratar somente um labirinto simultaneamente.
+
+
+Forma de Execução:
+
+        Renomear o arquivo TRAB3-2.EXE.txt para TRAB3-2.EXE e o arquivo TESTE_TRAB3-2.BAT.txt 
+	para TESTE_TRAB3-2.BAT.
+
+	Dar dois cliques no arquivo TESTE_TRAB3-2.BAT.
+
+	Será gerado um log de saída ("LogTesteLabirinto.log") com os resultados dos testes
+	especificados no arquivo TesteLabirinto.script.

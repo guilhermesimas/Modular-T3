@@ -429,7 +429,7 @@ LAB_tpCondRet LAB_SolucionarLab ( int *** buffer_solucao )
 
 /***********************************************************************
 *
-*  $FC Função: LAB
+*  $FC Função: LAB -Obter chave a partir de coordenadas
 *
 *  $ED Descrição da função
 *     - Retorna chave do vértice a partir das partes i e j
@@ -443,7 +443,7 @@ int ObterChaveCord (int i, int j)
 
 /***********************************************************************
 *
-*  $FC Função: LAB
+*  $FC Função: LAB -Obter chave a partir da direção
 *
 *  $ED Descrição da função
 *     - Retorna chave do vértice a partir de uma chave de origem
@@ -480,7 +480,7 @@ int ObterChaveDir (int chave, char direcao)
 
 /***********************************************************************
 *
-*  $FC Função: LAB
+*  $FC Função: LAB -Transformar coordenadas
 *
 *  $ED Descrição da função
 *     - Transforma das coordenadas x e y para as i e j
@@ -494,7 +494,7 @@ void TransfCord (int x, int y, int * i, int *j)
 
 /***********************************************************************
 *
-*  $FC Função: LAB
+*  $FC Função: LAB -Obter coordenadas a partir da chave
 *
 *  $ED Descrição da função
 *     - Obtem as coordenadas x e y a partir de uma chave

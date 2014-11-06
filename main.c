@@ -5,8 +5,10 @@
 
 #include "LABIRINTO.H"
 
+
+/***** Protótipos das funções *****/
+
 void Titulo ( void );
-void InicializaLAB (void );
 void MenuPrincipal ( void ) ;
 void JogarLab ( void );
 char ConvDir (int cod);
@@ -17,8 +19,12 @@ void ObtemPosicaoValida(int altura,int largura,int *x,int *y);
 void limpa_stdin(void);
 
 
-
-int main (){
+/***************************************************************************
+*
+*  Função: Main
+*****/
+int main (void)
+{
 	int entrada;
 
 	MenuPrincipal();
@@ -86,8 +92,12 @@ int main (){
 	LAB_DestruirLab();
 
 	return 0;
-}
+} /* Fim função: Main */
 
+/***************************************************************************
+*
+*  Função: Mostrar titulo
+*****/
 void Titulo ( void )
 {
 		printf("\n\n");
@@ -100,7 +110,12 @@ void Titulo ( void )
 		   "                                           \n"
 		   "                                           \n");
 
-}
+} /* Fim função: Mostrar titulo */
+
+/***************************************************************************
+*
+*  Função: Menu Principal
+*****/
 void MenuPrincipal ( void ) {
 
 	Titulo();
@@ -111,23 +126,12 @@ void MenuPrincipal ( void ) {
 			"\t\t\t4 - Sair\n");
 
 	printf("\n\n");
-}
-void InicializaLAB (void ){
+} /* Fim função: Menu principal */
 
-	LAB_CriarLab(3,3);
-
-	LAB_CriarCaminho(1,1,'l');
-	LAB_CriarCaminho(2,1,'l');
-	LAB_CriarCaminho(3,1,'n');
-	LAB_CriarCaminho(3,2,'o');
-	LAB_CriarCaminho(2,2,'o');
-	LAB_CriarCaminho(1,3,'s');
-	LAB_CriarCaminho(1,3,'l');
-	LAB_CriarCaminho(2,3,'l');
-
-	LAB_CriarEntrada(1,1);
-	LAB_CriarSaida(3,3);
-}
+/***************************************************************************
+*
+*  Função: Jogar labirinto
+*****/
 void JogarLab ( void )
 {
 	int entrada;
@@ -182,11 +186,6 @@ void JogarLab ( void )
 			{
 				printf("Labirinto impossivel, nao existe caminho ate a saida!!\n\n");
 				system("pause");
-			}
-			/*else
-			{
-				printf("O retorno foi: %d",ret);
-				system("pause");
 			} /* if */
 		}
 
@@ -231,8 +230,12 @@ void JogarLab ( void )
 			entrada=ReobterEntrada();
 		} /* while */
 	}
-}
+}/* Fim função: Jogar labirinto */
 
+/***************************************************************************
+*
+*  Função: Converter direção
+*****/
 char ConvDir (int cod)
 {
 	if (cod == 1)
@@ -252,7 +255,12 @@ char ConvDir (int cod)
 		return 'l';
 	} /* if */
 
-}
+} /* Fim função: Converter direção */
+
+/***************************************************************************
+*
+*  Função: Tela parabéns
+*****/
 void TelaPrbs ( void )
 {
 	system("cls");
@@ -263,7 +271,12 @@ void TelaPrbs ( void )
 			"\t| |  / ____ \\| | \\ \\  / ____ \\| |_) | |____| |\\  |____) |_|_|\n"
 			"\t|_| /_/    \\_\\_|  \\_\\/_/    \\_\\____/|______|_| \\_|_____/(_|_)\n\n\n");
 	system("pause");
-}
+} /* Fim função: Tela parabéns */
+
+/***************************************************************************
+*
+*  Função: Reobter entrada
+*****/
 int ReobterEntrada ( void )
 {
 	int entrada;
@@ -272,8 +285,12 @@ int ReobterEntrada ( void )
 	limpa_stdin();
 
 	return entrada;
-}
+} /* Fim função: Reobter entrada */
 
+/***************************************************************************
+*
+*  Função: Criar labirinto
+*****/
 void CriarLab ( void )
 {
 	int altura, largura, x,y,x2,y2, entrada;
@@ -480,7 +497,12 @@ void CriarLab ( void )
 			entrada=ReobterEntrada();
 		} /* while */
 	} /* while */
-}
+} /* Fim função: Criar labirinto */
+
+/***************************************************************************
+*
+*  Função: Obtém posição válida
+*****/
 void ObtemPosicaoValida(int altura,int largura,int *x,int *y)
 {
 	*x=-1;
@@ -499,8 +521,12 @@ void ObtemPosicaoValida(int altura,int largura,int *x,int *y)
 		scanf("%d",y);
 		limpa_stdin();
 	} /* while */
-}
+} /* Fim função: Obtém posição válida */
 
+/***************************************************************************
+*
+*  Função: Limpa stdin
+*****/
 void limpa_stdin(void)
 {
     int c;
@@ -508,4 +534,4 @@ void limpa_stdin(void)
     do {
         c = getchar();
     } while (c != '\n' && c != EOF);
-}
+} /* Fim função: Limpa stdin */

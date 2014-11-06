@@ -29,12 +29,12 @@ int main (){
 
 	while (entrada!=4) 
 	{
-		/* tratar crair labirinto */
+		/* tratar criar labirinto */
 		if(entrada==1)
 		{
 			system("cls");
 			CriarLab();
-		} /* if */
+		}
 		/* tratar carregar arquivo */
 		else if (entrada == 2)
 		{
@@ -52,8 +52,7 @@ int main (){
 			{
 				system("cls");
 				JogarLab();
-			} /* if */
-			
+			} /* if */	
 		}
 		/* tratar abrir arquivo demo */
 		else if (entrada == 3)
@@ -69,9 +68,7 @@ int main (){
 				system("cls");
 				JogarLab();
 			} /* if */
-
 		}
-
 		else
 		{
 			entrada=ReobterEntrada();
@@ -403,23 +400,6 @@ void CriarLab ( void )
 		}
 		else if (entrada == 2)
 		{
-		
-			int resp;
-			
-		/*	printf("\nTem certeza que quer salvar e voltar ao menu principal?\n"
-					"Nao podera voltar a editar o labirinto.\n"
-					"1 - SIM\n"
-					"2 - NAO\n");
-			scanf("%d", &resp);
-			limpa_stdin();
-
-			while (resp !=1 && resp!=2)
-			{
-				resp=ReobterEntrada();
-			} /* while */
-
-			/*if (resp == 1 )
-			{*/
 				char arq[35];
 				printf("\nQual o nome do arquivo? (maximo de 30 caracteres)\n");
 				scanf(" %30[^\n]",arq);
@@ -434,9 +414,6 @@ void CriarLab ( void )
 					printf("Erro ao salvar arquivo\n\n");
 				} /* if */
 				system("pause");
-				//LAB_DestruirLab();
-				//return; 
-			//} /* if */
 		}
 		else if (entrada == 3)
 		{
@@ -502,7 +479,7 @@ void CriarLab ( void )
 		{
 			entrada=ReobterEntrada();
 		} /* while */
-	}
+	} /* while */
 }
 void ObtemPosicaoValida(int altura,int largura,int *x,int *y)
 {

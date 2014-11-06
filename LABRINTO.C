@@ -100,13 +100,18 @@ LAB_tpCondRet LAB_CriarCaminho (int x, int y, char direcao)
 
 LAB_tpCondRet LAB_MostraLab ( void )
 {
-	int i, j,chave, posicao;
+	int i, j, chave, posicao ,x, y;
 
 	if(GRF_ObterCorr(labirinto,&posicao,NULL)==GRF_CondRetGrafoNaoExiste)
 	{
 		return LAB_CondRetLabirintoNaoExiste;
 	} /* if */
-	
+	ObterCoordChave(LAB_entrada,&x,&y);
+	printf("Entrada: (%d,%d)\n",x,y);
+	ObterCoordChave(LAB_saida,&x,&y);
+	printf("Saida: (%d,%d)\n",x,y);
+	ObterCoordChave(posicao,&x,&y);
+	printf("Posicao: (%d,%d)\n",x,y);
 	printf("  ");
 	for (i=0 ; i<2*LAB_largura+1; i++ )
 	{
@@ -427,7 +432,7 @@ LAB_tpCondRet LAB_SolucionarLab ( int *** buffer_solucao )
 *  $FC Função: LAB
 *
 *  $ED Descrição da função
-*     
+*     - Retorna chave do vértice a partir das partes i e j
 *
 ***********************************************************************/
 
@@ -441,7 +446,8 @@ int ObterChaveCord (int i, int j)
 *  $FC Função: LAB
 *
 *  $ED Descrição da função
-*     
+*     - Retorna chave do vértice a partir de uma chave de origem
+*		e a direção a ser andada
 *
 ***********************************************************************/
 
@@ -477,7 +483,7 @@ int ObterChaveDir (int chave, char direcao)
 *  $FC Função: LAB
 *
 *  $ED Descrição da função
-*     
+*     - Transforma das coordenadas x e y para as i e j
 *
 ***********************************************************************/
 void TransfCord (int x, int y, int * i, int *j)
@@ -491,7 +497,7 @@ void TransfCord (int x, int y, int * i, int *j)
 *  $FC Função: LAB
 *
 *  $ED Descrição da função
-*     
+*     - Obtem as coordenadas x e y a partir de uma chave
 *
 ***********************************************************************/
 void ObterCoordChave (int chave , int * x, int * y)

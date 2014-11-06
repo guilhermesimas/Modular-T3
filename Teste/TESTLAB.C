@@ -30,7 +30,7 @@
 #include    <stdio.h>
 #include    <malloc.h>
 
-#include    "TST_Espc.h"
+#include    "TST_ESPC.H"
 
 #include    "Generico.h"
 #include    "LerParm.h"

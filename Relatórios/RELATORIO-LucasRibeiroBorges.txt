@@ -1,0 +1,11 @@
+Data	HorasTrabalhadas	       Descrição				Detalhamento
+08/10		1			projetar				projetar modulo labirinto e a interface do prompt (principal)
+08/10		3			codificar módulo			codificar criação, impressão e percorrimento do labirinto
+09/10		2			codificar módulo			codificar interface com usuário
+09/10		1			revisar código do módulo		alterarações necessárias
+28/10		2.5			codificar módulo			codificar interface de criação e solução
+28/10		1			diagnosticar e corrigir			corrigir erros e exceções não previstas
+					problemas encontrados
+28/10		1.5			revisar código do módulo		adaptações aos novos retornos necessários para teste
+05/11		1			revisar código do módulo		alterações na interface do jogo
+05/11		1			revisar projeto				revisar documentos para entrega		
